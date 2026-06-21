@@ -211,7 +211,7 @@ export const getTicketsByUser = async (req, res) => {
       ticketJSON.Booking.Trip = tripCache[tripId];
 
       // 2. Enrich Seat
-      if (ticketJSON.trip_seat_id) {
+      if (ticketJSON.tripSeatId) {
         if (!tripCache[`seats_${tripId}`]) {
           try {
             tripCache[`seats_${tripId}`] = await tripService.getSeats(tripId);
@@ -219,32 +219,32 @@ export const getTicketsByUser = async (req, res) => {
             tripCache[`seats_${tripId}`] = [];
           }
         }
-        const seat = tripCache[`seats_${tripId}`].find(s => s.id === ticketJSON.trip_seat_id);
+        const seat = tripCache[`seats_${tripId}`].find(s => s.id === ticketJSON.tripSeatId);
         if (seat) ticketJSON.Seat = { seatNumber: seat.seat_number };
       }
 
       // 3. Enrich PickupStop
-      if (ticketJSON.pickup_stop_id) {
-        if (!stopCache[ticketJSON.pickup_stop_id]) {
+      if (ticketJSON.pickupStopId) {
+        if (!stopCache[ticketJSON.pickupStopId]) {
           try {
-            stopCache[ticketJSON.pickup_stop_id] = await catalogService.getRouteStop(ticketJSON.pickup_stop_id);
+            stopCache[ticketJSON.pickupStopId] = await catalogService.getRouteStop(ticketJSON.pickupStopId);
           } catch {
-            stopCache[ticketJSON.pickup_stop_id] = { stopName: 'N/A', address: 'N/A' };
+            stopCache[ticketJSON.pickupStopId] = { stopName: 'N/A', address: 'N/A' };
           }
         }
-        ticketJSON.PickupStop = stopCache[ticketJSON.pickup_stop_id];
+        ticketJSON.PickupStop = stopCache[ticketJSON.pickupStopId];
       }
 
       // 4. Enrich DropoffStop
-      if (ticketJSON.dropoff_stop_id) {
-        if (!stopCache[ticketJSON.dropoff_stop_id]) {
+      if (ticketJSON.dropoffStopId) {
+        if (!stopCache[ticketJSON.dropoffStopId]) {
           try {
-            stopCache[ticketJSON.dropoff_stop_id] = await catalogService.getRouteStop(ticketJSON.dropoff_stop_id);
+            stopCache[ticketJSON.dropoffStopId] = await catalogService.getRouteStop(ticketJSON.dropoffStopId);
           } catch {
-            stopCache[ticketJSON.dropoff_stop_id] = { stopName: 'N/A', address: 'N/A' };
+            stopCache[ticketJSON.dropoffStopId] = { stopName: 'N/A', address: 'N/A' };
           }
         }
-        ticketJSON.DropoffStop = stopCache[ticketJSON.dropoff_stop_id];
+        ticketJSON.DropoffStop = stopCache[ticketJSON.dropoffStopId];
       }
 
       enrichedTickets.push(ticketJSON);
