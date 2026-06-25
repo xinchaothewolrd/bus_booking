@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark Mode Theme Colors -->
+    <!-- Primary: Lighter green to pop on dark backgrounds -->
+    <color name="md_theme_dark_primary">#4ADE80</color>
+    <color name="md_theme_dark_onPrimary">#00390E</color>
+    <color name="md_theme_dark_primaryContainer">#016E21</color>
+    <color name="md_theme_dark_onPrimaryContainer">#90EE90</color>
+    
+    <color name="md_theme_dark_secondary">#BFC8CA</color>
+    <color name="md_theme_dark_onSecondary">#2A3234</color>
+    <color name="md_theme_dark_secondaryContainer">#40484A</color>
+    <color name="md_theme_dark_onSecondaryContainer">#DAE1E3</color>
+    
+    <color name="md_theme_dark_error">#FFB4AB</color>
+    <color name="md_theme_dark_onError">#690005</color>
+    
+    <color name="md_theme_dark_background">#111827</color>
+    <color name="md_theme_dark_onBackground">#E2E8F0</color>
+    
+    <!-- Surfaces -->
+    <color name="md_theme_dark_surface">#1F2937</color>
+    <color name="md_theme_dark_surfaceContainerLowest">#111827</color>
+    <color name="md_theme_dark_surfaceContainerHighest">#374151</color>
+    <color name="md_theme_dark_onSurface">#F3F4F6</color>
+    <color name="md_theme_dark_onSurfaceVariant">#9CA3AF</color>
+    
+    <!-- Outline -->
+    <color name="md_theme_dark_outline">#8C9388</color>
+    <color name="md_theme_dark_outlineVariant">#4A5568</color>
+
+    <!-- Semantic Status Colors Night -->
+    <color name="status_warning_bg">#422006</color>
+    <color name="status_warning_text">#FCD34D</color>
+    
+    <color name="status_success_bg">#022C22</color>
+    <color name="status_success_text">#6EE7B7</color>
+    
+    <color name="status_error_bg">#450A0A</color>
+    <color name="status_error_text">#FCA5A5</color>
+    
+    <color name="status_neutral_bg">#1F2937</color>
+    <color name="status_neutral_text">#9CA3AF</color>
+</resources>

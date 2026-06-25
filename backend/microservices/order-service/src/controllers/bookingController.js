@@ -4,7 +4,8 @@
 import sequelize from '../libs/db.js';
 import { Booking, Ticket, Payment } from '../models/index.js';
 import { tripService, catalogService } from '../libs/httpClient.js';
-import { notifyBookingCreated } from '../libs/notifyClient.js';
+import { notifyBookingCreated, notifyPaymentSuccess } from '../libs/notifyClient.js';
+import axios from 'axios';
 
 // ── TẠO BOOKING MỚI ──────────────────────────────────────────
 // POST /api/bookings
@@ -40,7 +41,7 @@ export const createBooking = async (req, res) => {
       if (tk.pickupStopId) {
         try {
           const stop = await catalogService.getRouteStop(tk.pickupStopId);
-          if (stop.route_id !== trip.route_id) throw new Error();
+          if ((stop.routeId || stop.route_id) != (trip.routeId || trip.route_id)) throw new Error();
         } catch {
           await t.rollback();
           return res.status(400).json({ message: `pickupStopId ${tk.pickupStopId} không hợp lệ.` });
@@ -66,6 +67,7 @@ export const createBooking = async (req, res) => {
         trip_seat_id: tk.tripSeatId,
         passenger_name: tk.passengerName,
         passenger_phone: tk.passengerPhone,
+        passenger_email: tk.passengerEmail,
         pickup_stop_id: tk.pickupStopId || null,
         dropoff_stop_id: tk.dropoffStopId || null,
         qr_code: `OB-${booking.id}-S${tk.tripSeatId}-${randomStr}`,
@@ -294,3 +296,51 @@ export const deleteBooking = async (req, res) => {
     return res.status(500).json({ message: 'Lỗi xóa đặt vé.' });
   }
 };
+
+// ── GỬI LẠI EMAIL (Admin) ─────────────────────────────────────
+export const resendEmail = async (req, res) => {
+  try {
+    const bookingId = req.params.id;
+    const booking = await Booking.findByPk(bookingId, {
+      include: [{ model: Ticket, as: 'Tickets' }, { model: Payment, as: 'Payment' }]
+    });
+
+    if (!booking) return res.status(404).json({ message: 'Đặt vé không tồn tại.' });
+    if (booking.status !== 'paid') return res.status(400).json({ message: 'Chỉ có thể gửi lại vé khi đã thanh toán.' });
+
+    let email = booking.Tickets?.[0]?.passenger_email;
+    let fullName = booking.Tickets?.[0]?.passenger_name;
+
+    if (!email && booking.user_id) {
+      try {
+        const userRes = await axios.get(`http://user-service:3001/api/users/${booking.user_id}`);
+        email = userRes.data.email;
+        fullName = userRes.data.full_name;
+      } catch (e) {
+        console.warn('Không lấy được user info:', e.message);
+      }
+    }
+
+    if (!email) {
+      return res.status(400).json({ message: 'Không tìm thấy địa chỉ email của khách hàng.' });
+    }
+
+    notifyPaymentSuccess({
+      email,
+      fullName: fullName || 'Quý khách',
+      bookingId: booking.id,
+      amount: booking.total_amount,
+      paymentMethod: booking.Payment?.payment_method || 'Thanh toán trực tuyến',
+      tickets: booking.Tickets.map(t => ({
+        passengerName: t.passenger_name,
+        qrCode: t.qr_code
+      })),
+    });
+
+    return res.status(200).json({ message: 'Đã gửi yêu cầu gửi lại email.' });
+  } catch (err) {
+    console.error('Lỗi resend email:', err);
+    return res.status(500).json({ message: 'Lỗi server khi gửi lại email.' });
+  }
+};
+

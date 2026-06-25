@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
 // ─── API ──────────────────────────────────────────────────────────────────────
-const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:8080/api";
+const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:3000/api";
 const api = axios.create({ baseURL: API_BASE });
 api.interceptors.request.use((cfg) => {
   const token = localStorage.getItem("token");
@@ -205,9 +205,13 @@ function BookingDetailModal({ booking, trips, routes, getTripPrice, onClose, onS
           <div className="grid grid-cols-2 gap-3">
             <div className="bg-slate-50 rounded-xl p-3 border border-slate-100">
               <p className="text-[11px] font-extrabold tracking-widest text-slate-500 uppercase mb-1">Khách hàng</p>
-              <p className="text-sm font-semibold text-slate-900 truncate">{booking?.User?.fullName ?? "Khách vãng lai"}</p>
-              <p className="text-xs text-slate-500 truncate">{booking?.User?.email ?? "Chưa cập nhật email"}</p>
-              <p className="text-[11px] text-slate-500">{booking.User?.phone ?? "—"}</p>
+              <p className="text-sm font-semibold text-slate-900 truncate">
+                {booking?.User?.fullName || tickets?.[0]?.passengerName || booking?.Tickets?.[0]?.passengerName || booking?.Tickets?.[0]?.passenger_name || "Khách vãng lai"}
+              </p>
+              <p className="text-xs text-slate-500 truncate">
+                {booking?.User?.email || tickets?.[0]?.passengerEmail || booking?.Tickets?.[0]?.passengerEmail || booking?.Tickets?.[0]?.passenger_email || "Chưa cập nhật email"}
+              </p>
+              <p className="text-[11px] text-slate-500">{booking?.User?.phone || tickets?.[0]?.passengerPhone || booking?.Tickets?.[0]?.passengerPhone || booking?.Tickets?.[0]?.passenger_phone || "—"}</p>
             </div>
             <div className="bg-slate-50 rounded-xl p-3 border border-slate-100">
               <p className="text-[11px] font-extrabold tracking-widest text-slate-500 uppercase mb-1">Thanh toán</p>
@@ -344,8 +348,14 @@ function EmailSendingModal({ email, passengerName, bookingId, onClose }) {
   ];
 
   useEffect(() => {
+    let apiCalled = false;
     const timer = setInterval(() => {
       setStep((s) => {
+        if (s === 2 && !apiCalled) {
+          apiCalled = true;
+          // Gọi API thật để gửi lại email
+          api.post(`/bookings/${bookingId}/resend-email`).catch(err => console.error("Lỗi gửi email:", err));
+        }
         if (s >= STEPS.length - 1) {
           clearInterval(timer);
           setTimeout(onClose, 1500);
@@ -355,7 +365,7 @@ function EmailSendingModal({ email, passengerName, bookingId, onClose }) {
       });
     }, 700);
     return () => clearInterval(timer);
-  }, [onClose, STEPS.length]);
+  }, [onClose, STEPS.length, bookingId]);
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-[100] p-4">
@@ -531,8 +541,8 @@ export default function ManageBookings() {
           if (b) {
             setSendingEmail({
               bookingId: id,
-              passengerName: b.User?.fullName ?? "Khách hàng",
-              email: b.User?.email ?? "khachhang@gmail.com",
+              passengerName: b.User?.fullName || (b.Tickets?.[0]?.passenger_name || b.Tickets?.[0]?.passengerName) || "Khách hàng",
+              email: b.User?.email || (b.Tickets?.[0]?.passenger_email || b.Tickets?.[0]?.passengerEmail) || "khachhang@gmail.com",
             });
           }
           return currentBookings;
@@ -689,7 +699,9 @@ export default function ManageBookings() {
                               {(b.User?.fullName || "U").charAt(0).toUpperCase()}
                             </div>
                               <div>
-                                <p className="text-[13px] font-bold text-slate-800 leading-tight">{b.User?.fullName || "Khách lạ"}</p>
+                                <p className="text-[13px] font-bold text-slate-800 leading-tight">
+                                  {b.User?.fullName || (b.Tickets?.[0]?.passenger_name || b.Tickets?.[0]?.passengerName) || "Khách lạ"}
+                                </p>
                                 <p className="text-[10px] text-slate-500 leading-tight">ID: {b.userId || "—"}</p>
                               </div>
                           </div>

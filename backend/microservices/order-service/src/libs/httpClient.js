@@ -48,6 +48,7 @@ export const tripService = {
 export const catalogService = {
   // Lấy thông tin điểm dừng (validate pickup/dropoff)
   getRouteStop: (stopId) => callService(`${CATALOG_SERVICE}/api/route-stops/${stopId}`),
+  getRoute: (routeId) => callService(`${CATALOG_SERVICE}/api/routes/${routeId}`),
 };
 
 // ── USER SERVICE ──────────────────────────────────────────────

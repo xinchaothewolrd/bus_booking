@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
 // ─── API ──────────────────────────────────────────────────────────────────────
-const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:8080/api";
+const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:3000/api";
 const api = axios.create({ baseURL: API_BASE });
 api.interceptors.request.use((cfg) => {
   const token = localStorage.getItem("token");
@@ -95,23 +95,24 @@ export default function ManageCheckin() {
 
   // Fetch trips and routes for Boarding List
   useEffect(() => {
-    if (role === "admin") {
-      const fetchListDependencies = async () => {
-        try {
-          const [tRes, rRes, bRes] = await Promise.all([
-            api.get("/trips"),
-            api.get("/routes"),
-            api.get("/bookings"),
-          ]);
-          setTrips(Array.isArray(tRes.data) ? tRes.data : tRes.data.data ?? []);
-          setRoutes(Array.isArray(rRes.data) ? rRes.data : rRes.data.data ?? []);
+    const fetchListDependencies = async () => {
+      try {
+        const [tRes, rRes] = await Promise.all([
+          api.get("/trips"),
+          api.get("/routes"),
+        ]);
+        setTrips(Array.isArray(tRes.data) ? tRes.data : tRes.data.data ?? []);
+        setRoutes(Array.isArray(rRes.data) ? rRes.data : rRes.data.data ?? []);
+        
+        if (role === "admin") {
+          const bRes = await api.get("/bookings");
           setBookings(Array.isArray(bRes.data) ? bRes.data : bRes.data.data ?? []);
-        } catch (err) {
-          console.error("Lỗi tải thông tin danh sách soát vé:", err);
         }
-      };
-      fetchListDependencies();
-    }
+      } catch (err) {
+        console.error("Lỗi tải thông tin danh sách soát vé:", err);
+      }
+    };
+    fetchListDependencies();
   }, [role]);
 
   // Global Check QR / Ticket ID
@@ -124,7 +125,24 @@ export default function ManageCheckin() {
     try {
       const { data } = await api.get(`/tickets/check/${qrInput.trim()}`);
       if (data?.ticket) {
-        setTicket(data.ticket);
+        let t = data.ticket;
+        try {
+          if (t.tripSeatId || t.trip_seat_id) {
+            const seatRes = await api.get(`/trip-seats/${t.tripSeatId || t.trip_seat_id}`);
+            t.seatNumber = seatRes.data?.seatNumber || seatRes.data?.seat_number;
+          }
+          if (t.pickup_stop_id) {
+            const pRes = await api.get(`/route-stops/${t.pickup_stop_id}`);
+            t.pickupStop = pRes.data;
+          }
+          if (t.dropoff_stop_id) {
+            const dRes = await api.get(`/route-stops/${t.dropoff_stop_id}`);
+            t.dropoffStop = dRes.data;
+          }
+        } catch (e) {
+          console.warn("Lỗi tải thông tin phụ của vé", e);
+        }
+        setTicket(t);
         showToast("Tìm thấy thông tin vé!");
       } else {
         showToast("Không tìm thấy thông tin vé", "error");
@@ -193,8 +211,8 @@ export default function ManageCheckin() {
           list.push({
             id: t.id,
             qrCode: t.qrCode,
-            passengerName: t.passengerName || userFullName,
-            passengerPhone: t.passengerPhone || userPhone,
+            passengerName: t.passengerName || t.passenger_name || userFullName,
+            passengerPhone: t.passengerPhone || t.passenger_phone || userPhone,
             seatNumber: t.tripSeat?.seatNumber ?? "—",
             status: t.status,
             bookingId: b.id,
@@ -417,31 +435,33 @@ export default function ManageCheckin() {
                     <div className="bg-slate-50 border border-slate-100 rounded-xl p-3.5">
                       <p className="text-[10px] font-extrabold text-slate-500 uppercase tracking-widest mb-1.5">Tuyến xe</p>
                       {(() => {
-                        const trip = getTrip(ticket.booking?.tripId);
-                        const route = trip ? routes.find((r) => r.id === trip.routeId) : null;
+                        const bookingInfo = ticket.booking || ticket.Booking;
+                        const tripId = bookingInfo?.tripId || bookingInfo?.trip_id;
+                        const trip = getTrip(tripId);
+                        const route = trip ? routes.find((r) => r.id === trip.routeId || r.id === trip.route_id) : null;
                         return route ? (
                           <div>
-                            <p className="text-sm font-bold text-slate-800 leading-tight">{route.departureLocation}</p>
-                            <p className="text-[11px] text-slate-500 leading-tight">đến {route.arrivalLocation}</p>
+                            <p className="text-sm font-bold text-slate-800 leading-tight">{route.departureLocation || route.departure_location}</p>
+                            <p className="text-[11px] text-slate-500 leading-tight">đến {route.arrivalLocation || route.arrival_location}</p>
                           </div>
                         ) : (
-                          <p className="text-xs font-bold text-slate-700">Chuyến #{ticket.booking?.tripId}</p>
+                          <p className="text-xs font-bold text-slate-700">Chuyến #{tripId}</p>
                         );
                       })()}
-                      <p className="text-[10px] text-slate-400 mt-2 font-medium">Khởi hành: {fmtDatetime(ticket.booking?.departureTime)}</p>
+                      <p className="text-[10px] text-slate-400 mt-2 font-medium">Khởi hành: {fmtDatetime((ticket.booking || ticket.Booking)?.departureTime || (ticket.booking || ticket.Booking)?.departure_time)}</p>
                     </div>
 
                     <div className="bg-slate-50 border border-slate-100 rounded-xl p-3.5">
                       <p className="text-[10px] font-extrabold text-slate-500 uppercase tracking-widest mb-1.5">Chỗ ngồi</p>
                       <div className="flex items-center gap-2">
                         <div className="w-9 h-9 rounded-lg bg-emerald-100 border border-emerald-200 text-emerald-700 flex items-center justify-center text-sm font-extrabold">
-                          {ticket.seatNumber}
+                          {ticket.seatNumber || ticket.tripSeatId || ticket.trip_seat_id || "—"}
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-slate-800 leading-tight">Đơn hàng #{ticket.booking?.id}</p>
+                          <p className="text-xs font-bold text-slate-800 leading-tight">Đơn hàng #{(ticket.booking || ticket.Booking)?.id}</p>
                           <div className="mt-1">
                             {(() => {
-                              const payStatus = ticket.booking?.status || "pending";
+                              const payStatus = (ticket.booking || ticket.Booking)?.status || "pending";
                               const meta = PAYMENT_STATUS_META[payStatus] || { label: payStatus, color: "#475569", bg: "#f1f5f9", border: "#cbd5e1" };
                               return (
                                 <span
@@ -473,12 +493,12 @@ export default function ManageCheckin() {
                       <div className="space-y-2 text-xs">
                         <div>
                           <span className="font-bold text-slate-700">Điểm đón: </span>
-                          <span className="text-slate-600">{ticket.pickupStop?.name || "Bến xe đi"}</span>
+                          <span className="text-slate-600">{ticket.pickupStop?.name || ticket.pickupStop?.stopName || "Bến xe đi"}</span>
                           {ticket.pickupStop?.address && <p className="text-[10px] text-slate-500 font-semibold">{ticket.pickupStop.address}</p>}
                         </div>
                         <div>
                           <span className="font-bold text-slate-700">Điểm trả: </span>
-                          <span className="text-slate-600">{ticket.dropoffStop?.name || "Bến xe đến"}</span>
+                          <span className="text-slate-600">{ticket.dropoffStop?.name || ticket.dropoffStop?.stopName || "Bến xe đến"}</span>
                           {ticket.dropoffStop?.address && <p className="text-[10px] text-slate-500 font-semibold">{ticket.dropoffStop.address}</p>}
                         </div>
                       </div>

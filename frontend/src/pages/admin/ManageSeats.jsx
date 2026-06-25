@@ -3,8 +3,8 @@ import axios from "axios";
 import { io } from "socket.io-client";
 
 // ─── Config ───────────────────────────────────────────────────────────────────
-const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:8080/api";
-const WS_URL = import.meta.env.VITE_WS_URL ?? "http://localhost:8080";
+const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:3000/api";
+const WS_URL = import.meta.env.VITE_WS_URL ?? "http://localhost:3000";
 
 const api = axios.create({ baseURL: API_BASE });
 api.interceptors.request.use((cfg) => {

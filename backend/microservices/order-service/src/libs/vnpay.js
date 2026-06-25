@@ -8,7 +8,7 @@ const VNPAY_CONFIG = {
   returnUrl:  process.env.VNPAY_RETURN_URL  || 'http://localhost:3000/api/payments/vnpay-return',
 };
 
-export const createPaymentUrl = ({ bookingId, amount, orderInfo, ipAddr, locale = 'vn' }) => {
+export const createPaymentUrl = ({ bookingId, amount, orderInfo, ipAddr, locale = 'vn', returnUrl }) => {
   const date = new Date();
   const createDate = formatDate(date);
   const orderId = `BK${bookingId}-${Date.now()}`;
@@ -22,7 +22,8 @@ export const createPaymentUrl = ({ bookingId, amount, orderInfo, ipAddr, locale 
     .trim()
     .replace(/ /g, '+');
 
-  const encodedReturnUrl = encodeURIComponent(VNPAY_CONFIG.returnUrl);
+  const finalReturnUrl = returnUrl || VNPAY_CONFIG.returnUrl;
+  const encodedReturnUrl = encodeURIComponent(finalReturnUrl);
 
   const params = {
     vnp_Amount:     String(Math.round(amount * 100)),
@@ -66,7 +67,10 @@ export const verifyReturnUrl = (rawQueryString) => {
   delete query['vnp_SecureHashType'];
 
   const sortedParams = sortObject(query);
-  const signData = Object.entries(sortedParams).map(([k, v]) => `${k}=${v}`).join('&');
+  const signData = Object.entries(sortedParams)
+    .filter(([k]) => k.startsWith('vnp_'))
+    .map(([k, v]) => `${k}=${v}`)
+    .join('&');
 
   const hmac = crypto.createHmac('sha512', VNPAY_CONFIG.hashSecret);
   const checkHash = hmac.update(Buffer.from(signData, 'utf-8')).digest('hex');

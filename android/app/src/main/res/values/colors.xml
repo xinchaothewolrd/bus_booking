@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <color name="md_theme_light_primary">#016E21</color>
+    <color name="md_theme_light_onPrimary">#FFFFFF</color>
+    <color name="md_theme_light_primaryContainer">#90EE90</color>
+    <color name="md_theme_light_onPrimaryContainer">#016E21</color>
+    
+    <color name="md_theme_light_secondary">#586062</color>
+    <color name="md_theme_light_onSecondary">#FFFFFF</color>
+    <color name="md_theme_light_secondaryContainer">#DAE1E3</color>
+    <color name="md_theme_light_onSecondaryContainer">#5D6466</color>
+    
+    <color name="md_theme_light_error">#BA1A1A</color>
+    <color name="md_theme_light_onError">#FFFFFF</color>
+    
+    <color name="md_theme_light_background">#F8F9FA</color>
+    <color name="md_theme_light_onBackground">#191C1D</color>
+    
+    <color name="md_theme_light_surface">#F8F9FA</color>
+    <color name="md_theme_light_surfaceContainerLowest">#FFFFFF</color>
+    <color name="md_theme_light_surfaceContainerHighest">#E1E3E4</color>
+    <color name="md_theme_light_onSurface">#191C1D</color>
+    <color name="md_theme_light_onSurfaceVariant">#3F493D</color>
+    
+    <color name="md_theme_light_outline">#6F7A6C</color>
+    <color name="md_theme_light_outlineVariant">#BFCABA</color>
+
+    <!-- Semantic Status Colors Day -->
+    <color name="status_warning_bg">#FFFBEB</color>
+    <color name="status_warning_text">#D97706</color>
+    
+    <color name="status_success_bg">#F0FDF4</color>
+    <color name="status_success_text">#059669</color>
+    
+    <color name="status_error_bg">#FEF2F2</color>
+    <color name="status_error_text">#DC2626</color>
+    
+    <color name="status_neutral_bg">#F8FAFC</color>
+    <color name="status_neutral_text">#64748B</color>
+</resources>

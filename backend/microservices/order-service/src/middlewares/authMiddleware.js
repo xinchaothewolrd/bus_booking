@@ -3,8 +3,8 @@
 
 export const requireAdmin = (req, res, next) => {
   const userRole = req.headers['x-user-role'];
-  if (userRole !== 'admin') {
-    return res.status(403).json({ message: 'Yêu cầu quyền Admin.' });
+  if (userRole !== 'admin' && userRole !== 'staff') {
+    return res.status(403).json({ message: 'Yêu cầu quyền Admin hoặc Staff.' });
   }
   next();
 };

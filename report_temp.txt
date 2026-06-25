@@ -1,0 +1,1955 @@
+BỘ KHOA HỌC VÀ CÔNG NGHỆ 
+HỌC VIỆN CÔNG NGHỆ BƯU CHÍNH VIỄN THÔNG
+-----------------------------
+BÁO CÁO 
+ĐỒ ÁN MÔN HỌC
+ĐỀ TÀI: WEBSITE ĐẶT LỊCH KHÁM BỆNH ONLINE
+        
+Môn học: 
+Kiến trúc và thiết kế hệ thống
+Giảng viên hướng dẫn: ThS. Nguyễn Văn Hữu Hoàng
+Thực hiện bởi nhóm sinh viên, bao gồm: 
+Hồ Minh Khoa
+N22DCCN140
+Nguyễn Ngọc Đức
+N22DCCN121
+TP.HCM, tháng 6
+ /
+2026
+MỤC LỤC
+Trang
+CHƯƠNG 1: GIỚI THIỆU ĐỀ TÀI
+1
+1.1. Lý do chọn đề tài
+1
+1.2. Phân tích thực trạng và sự cần thiết của hệ thống
+1
+1.3. Mục tiêu và phạm vi đề tài
+1
+1.3.1. Mục tiêu
+1
+1.3.2. Phạm vi
+2
+1.4. Đối tượng và phương pháp nghiên cứu
+2
+CHƯƠNG 2: CƠ SỞ LÝ THUYẾT VÀ CÔNG NGHỆ
+3
+2.1. Kiến trúc hệ thống: Phân tích và lựa chọn
+3
+2.1.1. Kiến trúc nguyên khối (Monolithic Architecture)
+3
+2.1.2. Kiến trúc Hướng dịch vụ (SOA) và Microservices
+3
+2.2. Công nghệ Backend
+4
+2.2.1. Ngôn ngữ lập trình Java
+4
+2.2.2. Framework Spring Boot
+4
+2.2.3. Cơ chế bảo mật phi trạng thái với JWT (JSON Web Token)
+4
+2.3. Công nghệ Frontend và Xây dựng Giao diện người dùng
+5
+2.3.1. Framework Next.js (React.js)
+5
+2.3.2. Tailwind CSS
+5
+2.4. Công nghệ Cơ sở dữ liệu
+6
+2.4.1. Hệ quản trị CSDL MySQL (Mô hình Database per Service)
+6
+2.5. Tổng quan về Mẫu thiết kế (Design Patterns)
+6
+CHƯƠNG 3: PHÂN TÍCH VÀ THIẾT KẾ HỆ THỐNG
+8
+3.1 Phân tích yêu cầu
+8
+3.1.1 Xác định và mô tả các tác nhân chính
+8
+3.1.2 Biểu đồ ca sử dụng tổng quát
+9
+3.1.3 Mô tả chi tiết các ca sử dụng (use case) chính
+11
+3.2 Sơ đồ tuần tự của một số UseCase chính
+13
+3.2.1 Sơ đồ tuần tự UseCase: Đặt lịch khám bệnh (Appointment Booking)
+13
+3.2.2 Sơ đồ tuần tự Use Case tiếp nhận và nhập bệnh án
+14
+3.2.3 Sơ đồ tuần tự Use Case: Cấu hình lịch làm việc (Slot Configuration)
+14
+3.2.4 Sơ đồ tuần tự Use Case: Quản lý danh mục và giá dịch vụ
+14
+3.2.5 Sơ đồ tuần tự Use Case: Tra cứu lịch sử khám bệnh (Medical History)
+15
+3.3 Thiết kế kiến trúc
+15
+3.3.1. Tầng Giao diện (Frontend Layer)
+15
+3.3.2. Cổng giao tiếp API (API Gateway)
+16
+3.3.3. Tầng Dịch vụ (Microservices Layer)
+16
+3.3.4. Tầng Dữ liệu (Database Layer)
+22
+3.4 Thiết kế Cơ sở dữ liệu
+22
+3.4.1. Nguyên tắc thiết kế dữ liệu trong kiến trúc Microservices
+22
+3.4.2 Cấu hình chi tiết các cơ sở dữ liệu
+22
+3.5. Thiết kế giao diện lập trình ứng dụng (RESTful API)
+32
+3.5.1. Identity Service (Xác thực và Phân quyền)
+32
+3.5.2. Profile Service (Quản lý Hồ sơ & Lịch trực)
+33
+3.5.3. Appointment Service (Quản lý Đặt lịch)
+35
+3.5.4. Medical Record Service (Quản lý Bệnh án)
+36
+3.5.5. Payment Service (Thanh toán trực tuyến)
+36
+3.5.6. Notification Service (Thông báo sự kiện)
+37
+3.6. Cài đặt chi tiết các Mẫu thiết kế (Design Patterns)
+38
+3.6.1. Builder Pattern (Mẫu Xây dựng)
+38
+3.6.2. Factory Method Pattern (Mẫu Phương thức Khởi tạo)
+39
+3.6.3. Strategy Pattern (Mẫu Chiến lược)
+45
+3.6.4. State Pattern
+47
+CHƯƠNG 4: TRIỂN KHAI VÀ ĐÁNH GIÁ KẾT QUẢ
+52
+4.1. Môi trường triển khai hệ thống (Deployment Environment)
+52
+4.1.1. Triển khai tầng Giao diện (Frontend)
+52
+4.1.2. Triển khai tầng Dịch vụ và Dữ liệu (Backend & Database)
+52
+4.2 Giao diện chương trình
+53
+4.2.1 Phân hệ giao diện xác thực người dùng
+53
+4.2.2 Phân hệ giao diện người dùng
+54
+4.2.3 Phân hệ giao diện bác sĩ
+60
+4.3. Đánh giá ưu nhược điểm của hệ thống
+64
+4.3.1. Ưu điểm nổi bật
+65
+4.3.2. Những hạn chế và khó khăn còn tồn tại
+65
+CHƯƠNG 5: KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN
+66
+5.1. Kết luận
+66
+5.2. Hướng phát triển trong tương lai
+66
+Phân công công việc
+68
+DANH SÁCH 
+BẢNG
+ 
+Bảng 3.1 Users
+23
+Bảng 3.2 Sessions
+24
+Bảng 3.3 Specialties
+25
+Bảng 3.4 Patients
+25
+Bảng 3.5 Doctors
+25
+Bảng 3.6 Doctor Schedules
+26
+Bảng 3.7 Appointments
+28
+Bảng 3.8 Slot Locks
+28
+Bảng 3.9 Medical Records
+29
+Bảng 3.10 Payments
+31
+Bảng 3.11 Notification Logs
+32
+DANH SÁCH HÌNH
+Hình 3.1 Ca sử dụng tổng quát
+10
+Hình 3.2 Cơ sở dữ liệu clinic_identity
+23
+Hình 3.3 Cơ sở dữ liệu clinic_profile
+24
+Hình 3.4 Cơ sở dữ liệu clinic_appointment
+27
+Hình 3.5 Cơ sở dữ liệu clinic_medical_record
+29
+Hình 3.6 Cơ sở dữ liệu: clinic_payment
+30
+Hình 3.7 Cơ sở dữ liệu: clinic_notification
+31
+CHƯƠNG 1: GIỚI THIỆU ĐỀ TÀI
+1.1. Lý do chọn đề tài
+Trong kỷ nguyên chuyển đổi số, ngành y tế đang đối mặt với những thách thức lớn về khả năng quản lý và tối ưu hóa quy trình khám chữa bệnh. Tại nhiều bệnh viện truyền thống, việc đặt lịch khám thường được thực hiện thủ công thông qua điện thoại hoặc trực tiếp tại quầy tiếp đón. Điều này dẫn đến những bất cập không nhỏ như: tình trạng quá tải cục bộ tại các khung giờ cao điểm, thời gian chờ đợi kéo dài của bệnh nhân, và sự khó khăn trong việc quản lý, phân bổ lịch làm việc của đội ngũ y bác sĩ đối với quản trị viên.
+Xuất phát từ thực tế đó, đề tài 
+"Thiết kế và xây dựng hệ thống đặt lịch khám bệnh trực tuyến trên nền tảng kiến trúc Microservices (SOA)"
+ được hình thành. Mục tiêu của đề tài không chỉ là tạo ra một website đặt lịch thông thường, mà là xây dựng một hệ thống phân tán có khả năng mở rộng, đảm bảo tính ổn định và linh hoạt khi tích hợp đa dạng các dịch vụ nghiệp vụ.
+1.2. Phân tích thực trạng và sự cần thiết của hệ thống
+Trước khi có các ứng dụng đặt lịch trực tuyến, quy trình khám bệnh thường vận hành theo cơ chế truyền thống:
+Đối với bệnh nhân:
+ Phải trực tiếp đến cơ sở y tế từ sớm để xếp hàng lấy số thứ tự, dẫn đến sự lãng phí thời gian và mệt mỏi, đặc biệt với những người cao tuổi hoặc người có bệnh nền.
+Đối với bệnh viện:
+ Gặp khó khăn trong việc dự đoán lưu lượng bệnh nhân theo thời gian thực. Việc quản lý thông tin bệnh nhân bị phân mảnh, dễ sai sót do thao tác thủ công.
+Đối với bác sĩ:
+ Khó kiểm soát lịch trình làm việc cá nhân, dẫn đến sự chồng chéo hoặc lãng phí thời gian khám bệnh.
+Hệ thống đặt lịch khám bệnh được phát triển nhằm giải quyết triệt để các vấn đề nêu trên thông qua việc chuyển đổi quy trình từ truyền thống sang kỹ thuật số, áp dụng kiến trúc Microservices để tách biệt các chức năng cốt lõi như: Xác thực (Identity), Hồ sơ (Profile), Đặt lịch (Appointment), Thanh toán (Payment), và Thông báo (Notification).
+1.3. Mục tiêu và phạm vi đề tài
+1.3.1. Mục tiêu
+Xây dựng một hệ thống đặt lịch khám bệnh trực tuyến cho phép bệnh nhân tìm kiếm bác sĩ, chuyên khoa và chọn khung giờ khám theo thời gian thực (Real-time).
+Ứng dụng các thiết kế hiện đại như 
+State Pattern
+ (quản lý trạng thái lịch hẹn) và 
+Strategy Pattern
+ (tính toán chi phí khám), đảm bảo mã nguồn dễ bảo trì và mở rộng.
+Thiết kế kiến trúc hệ thống theo hướng Microservices, đảm bảo mỗi service độc lập và có khả năng phục hồi (fault tolerance).
+1.3.2. Phạm vi
+Hệ thống tập trung vào 3 nhóm đối tượng (Actors) chính:
+Bệnh nhân:
+ Tìm kiếm, đặt lịch, thanh toán trực tuyến và tra cứu kết quả khám.
+Bác sĩ:
+ Xem lịch khám, quản lý danh sách bệnh nhân và trả kết quả khám.
+Quản trị viên (Admin):
+ Quản lý chuyên khoa, cấu hình lịch trực cho bác sĩ và quản lý tài khoản hệ thống.
+1.4. Đối tượng và phương pháp nghiên cứu
+Công nghệ sử dụng:
+ Spring Boot (Java), Next.js (Frontend), MySQL (Database per Service)
+Kiến trúc:
+ SOA (Service-Oriented Architecture) kết hợp Microservices.
+Phương pháp:
+ Nghiên cứu tài liệu nghiệp vụ, phân tích thiết kế hệ thống (UML), áp dụng các mẫu thiết kế (Design Patterns) vào quá trình thực thi mã nguồn.
+CHƯƠNG 2: CƠ SỞ LÝ THUYẾT VÀ CÔNG NGHỆ
+2.1. Kiến trúc hệ thống: Phân tích và lựa chọn
+Trong quá trình thiết kế và phát triển phần mềm, việc lựa chọn kiến trúc hệ thống đóng vai trò quyết định đến tính ổn định, khả năng mở rộng và hiệu năng của toàn bộ ứng dụng.
+2.1.1. Kiến trúc nguyên khối (Monolithic Architecture)
+Trước đây, các hệ thống phần mềm thường được xây dựng theo kiến trúc Nguyên khối (Monolithic). Trong mô hình này, toàn bộ các thành phần của ứng dụng từ giao diện người dùng, xử lý logic nghiệp vụ (đặt lịch, thanh toán, quản lý bệnh nhân) cho đến truy xuất cơ sở dữ liệu đều được đóng gói thành một khối duy nhất và triển khai trên cùng một máy chủ. Tuy nhiên, khi hệ thống y tế phát triển với lượng người dùng lớn, kiến trúc Monolithic bộc lộ nhiều bất cập nghiêm trọng:
+Khó khăn trong việc mở rộng (Scaling):
+ Khi một module (ví dụ: module Đặt lịch) bị quá tải, quản trị viên buộc phải nhân bản toàn bộ ứng dụng, gây lãng phí tài nguyên cho các module không cần thiết.
+Mức độ rủi ro cao (Single Point of Failure):
+ Chỉ cần một lỗi nhỏ ở tính năng Thanh toán cũng có thể làm sập toàn bộ hệ thống Đặt lịch khám bệnh.
+Triển khai chậm chạp:
+ Bất kỳ một thay đổi nhỏ nào trong mã nguồn cũng đòi hỏi phải biên dịch và kiểm thử lại toàn bộ hệ thống.
+2.1.2. Kiến trúc Hướng dịch vụ (SOA) và Microservices
+Nhằm giải quyết triệt để các hạn chế của Monolithic, đề tài đã quyết định áp dụng 
+Kiến trúc Hướng dịch vụ (SOA - Service-Oriented Architecture)
+ kết hợp với mô hình 
+Microservices
+. Trong kiến trúc này, hệ thống lớn được chia cắt thành nhiều dịch vụ nhỏ (services) độc lập. Mỗi dịch vụ chịu trách nhiệm cho một nghiệp vụ cốt lõi duy nhất và giao tiếp với nhau thông qua mạng (cụ thể là RESTful API).
+Sự vượt trội của kiến trúc Microservices so với Monolithic trong hệ thống đặt lịch khám bệnh được thể hiện qua các điểm sau:
+Sự cô lập lỗi (Fault Isolation):
+ Nếu Payment Service (Dịch vụ thanh toán) gặp sự cố mạng hoặc bảo trì, bệnh nhân vẫn có thể xem hồ sơ bệnh án qua Medical Record Service một cách bình thường. Hệ thống không bị tê liệt toàn phần.
+Khả năng mở rộng độc lập (Independent Scalability):
+ Vào các khung giờ cao điểm (sáng sớm khi bệnh nhân ồ ạt đặt lịch), hệ thống có thể tự động cấp phát thêm tài nguyên 
+(scale up) riêng cho Appointment Service mà không làm ảnh hưởng đến các service khác, giúp tối ưu hóa chi phí máy chủ.
+Mô hình Dữ liệu phân tán (Database per Service):
+ Mỗi Microservice sở hữu một cơ sở dữ liệu riêng biệt. Điều này xóa bỏ tình trạng "thắt cổ chai" (bottleneck) khi hàng ngàn kết nối cùng truy vấn vào một cơ sở dữ liệu duy nhất.
+Tích hợp và Triển khai liên tục (CI/CD):
+ Mã nguồn của từng dịch vụ được quản lý độc lập. Việc nâng cấp phiên bản mới cho module Notification Service diễn ra nhanh chóng, không yêu cầu thời gian "downtime" của toàn hệ thống.
+2.2. Công nghệ Backend
+Để hiện thực hóa kiến trúc Microservices đã phân tích, hệ thống Backend được xây dựng dựa trên hệ sinh thái Java, nổi bật với tính mạnh mẽ, bảo mật và khả năng xử lý đa luồng ưu việt.
+2.2.1. Ngôn ngữ lập trình Java
+Java là một ngôn ngữ lập trình hướng đối tượng (OOP) lâu đời và được ứng dụng rộng rãi trong các hệ thống doanh nghiệp (Enterprise) lớn. Đối với một hệ thống y tế đòi hỏi tính chính xác tuyệt đối và bảo mật cao, Java cung cấp một môi trường thực thi (JVM) ổn định, quản lý bộ nhớ tự động (Garbage Collection) và hỗ trợ xử lý hàng ngàn luồng (threads) đồng thời một cách mượt mà.
+2.2.2. Framework Spring Boot
+Mã nguồn của các Microservices trong đề tài được phát triển trên nền tảng 
+Spring Boot
+. Đây là một framework tiên tiến của hệ sinh thái Spring, mang lại những lợi ích to lớn:
+Cơ chế Đảo ngược điều khiển (IoC) và Tiêm phụ thuộc (DI):
+ Spring Boot tự động quản lý vòng đời của các đối tượng (Beans), giúp giảm thiểu sự phụ thuộc lẫn nhau (loose coupling) giữa các thành phần mã nguồn, tạo điều kiện thuận lợi để áp dụng các Design Pattern như 
+Strategy
+ hay 
+State
+.
+Tích hợp máy chủ nhúng (Embedded Server):
+ Spring Boot đi kèm với máy chủ Tomcat nhúng sẵn. Điều này cực kỳ phù hợp với kiến trúc Microservices vì mỗi dịch vụ có thể chạy độc lập như một ứng dụng độc lập thông qua phương thức main() mà không cần cấu hình máy chủ Web bên ngoài phức tạp.
+Hỗ trợ tối đa cho RESTful API:
+ Spring Boot cung cấp các thư viện mạnh mẽ như Spring Web, Spring Data JPA giúp việc xây dựng các điểm cuối (Endpoints) để các services giao tiếp với nhau trở nên nhanh chóng và chuẩn hóa.
+2.2.3. Cơ chế bảo mật phi trạng thái với JWT (JSON Web Token)
+Do đặc thù của kiến trúc Microservices là phân tán, việc sử dụng Session (phiên làm việc lưu trên máy chủ) theo kiểu truyền thống là bất khả thi, vì các request của người dùng có thể được chuyển 
+hướng đến các server khác nhau. Để giải quyết bài toán xác thực, hệ thống áp dụng 
+JSON Web Token (JWT)
+.
+Nguyên lý hoạt động:
+ Khi người dùng (Bệnh nhân/Bác sĩ) đăng nhập thành công qua Identity Service, hệ thống sẽ sử dụng thuật toán mã hóa để cấp phát một chuỗi JWT. Chuỗi này chứa thông tin định danh người dùng (ID, Role) và một chữ ký số hợp lệ.
+Ưu điểm vượt trội (Stateless Authentication):
+ Các token này mang tính "phi trạng thái" (stateless). Khi người dùng gửi yêu cầu đặt lịch đến Appointment Service, service này chỉ cần dùng một khóa bí mật (Secret Key) để xác minh chữ ký của JWT mà không cần gọi ngược về Identity Service hay truy vấn cơ sở dữ liệu. Điều này giúp giảm độ trễ (latency), tăng hiệu năng hệ thống và chặn đứng các cuộc tấn công giả mạo phiên làm việc.
+2.3. Công nghệ Frontend và Xây dựng Giao diện người dùng
+Để đáp ứng yêu cầu về một hệ thống có tương tác thời gian thực, thân thiện với người dùng và tối ưu hóa công cụ tìm kiếm (SEO), phía Client (Frontend) của hệ thống được phát triển dựa trên các công nghệ hiện đại nhất hiện nay bao gồm Next.js và TailwindCSS.
+2.3.1. Framework Next.js (React.js)
+Next.js là một framework mạnh mẽ được xây dựng trên nền tảng React.js. Trong đồ án này, Next.js được sử dụng kết hợp với kiến trúc App Router tiên tiến để giải quyết các bài toán giao diện phức tạp:
+Cơ chế Server-Side Rendering (SSR) và Static Site Generation (SSG):
+ Khác với các ứng dụng Single Page Application (SPA) truyền thống, Next.js cho phép kết xuất mã HTML ngay từ phía máy chủ. Điều này cực kỳ quan trọng đối với trang tìm kiếm Bác sĩ/Chuyên khoa, giúp các công cụ tìm kiếm (Google) dễ dàng thu thập dữ liệu (SEO), từ đó bệnh nhân có thể tìm thấy thông tin bệnh viện nhanh chóng hơn.
+Phân tách luồng giao diện logic (Routing Separation):
+ Hệ thống phục vụ ba nhóm đối tượng (Actors) có đặc thù công việc hoàn toàn khác nhau. Next.js cho phép phân tách cấu trúc định tuyến (Route) một cách khoa học: luồng (patient) dành cho giao diện đặt lịch của bệnh nhân, luồng (doctor) dành cho không gian làm việc của y bác sĩ, và luồng (admin) phục vụ công tác quản trị. Sự phân tách này giúp mã nguồn Frontend dễ bảo trì, tái sử dụng được các thành phần (components) dùng chung, nhưng vẫn đảm bảo tính bảo mật và chuyên biệt cho từng nhóm quyền.
+2.3.2. Tailwind CSS
+Tailwind CSS là một thư viện CSS theo hướng tiện ích (utility-first). Thay vì viết các tệp CSS định kiểu riêng biệt, Tailwind cung cấp các lớp (classes) được định nghĩa sẵn để nhúng trực tiếp vào mã HTML/JSX.
+Việc áp dụng Tailwind CSS giúp hệ thống có một thiết kế đồng nhất (Design System), rút ngắn thời gian phát triển UI.
+Hỗ trợ thiết kế đáp ứng (Responsive Design) một cách triệt để, đảm bảo giao diện bệnh nhân hiển thị tối ưu trên thiết bị di động (Mobile) khi họ thao tác đặt lịch, đồng thời cung cấp giao diện bảng điều khiển (Dashboard) rộng rãi, trực quan trên màn hình máy tính (Desktop) cho Bác sĩ và Quản trị viên.
+2.4. Công nghệ Cơ sở dữ liệu
+Kiến trúc Microservices đòi hỏi một chiến lược lưu trữ dữ liệu hoàn toàn khác biệt so với các hệ thống truyền thống để tránh tình trạng thắt cổ chai và đảm bảo tính toàn vẹn của dịch vụ.
+2.4.1. Hệ quản trị CSDL MySQL (Mô hình Database per Service)
+MySQL là hệ quản trị cơ sở dữ liệu quan hệ (RDBMS) mã nguồn mở phổ biến, nổi bật với tính ACID (Atomicity, Consistency, Isolation, Durability) - điều kiện tiên quyết cho các giao dịch y tế và thanh toán trực tuyến. Trong đồ án này, hệ thống áp dụng triệt để mô hình 
+Database per Service
+. Cụ thể:
+Tính đóng gói (Encapsulation):
+ Mỗi Microservice (Identity, Profile, Appointment, Payment,...) sở hữu một Schema/Database hoàn toàn độc lập (ví dụ: clinic_identity, clinic_appointment). Một service chỉ có quyền truy cập vào cơ sở dữ liệu của chính nó, không được phép can thiệp trực tiếp vào dữ liệu của service khác.
+Liên kết mềm (Soft References):
+ Để duy trì tính độc lập của kiến trúc, hệ thống loại bỏ hoàn toàn các Khóa ngoại cứng (Foreign Keys constraint) xuyên database. Sự liên kết giữa các thực thể (ví dụ: liên kết giữa Patient ở Profile Service và Appointment ở Appointment Service) được thực hiện thông qua "Liên kết mềm" (Soft Reference) bằng mã định danh (ID/UUID).
+Việc thiết kế này đảm bảo rằng khi một cơ sở dữ liệu gặp sự cố, nó chỉ cô lập lỗi tại một nghiệp vụ nhất định, không làm sập toàn bộ dữ liệu của bệnh viện. Đồng thời, nó cho phép các đội phát triển dễ dàng tùy biến, sao lưu hoặc thay đổi cấu trúc bảng mà không làm vỡ liên kết của các hệ thống khác.
+2.5. Tổng quan về Mẫu thiết kế (Design Patterns)
+Trong kỹ nghệ phần mềm, Mẫu thiết kế (Design Pattern) là các giải pháp tổng quát, đã được đúc kết và chứng minh tính hiệu quả nhằm giải quyết các vấn đề thường xuyên lặp lại trong quá trình thiết kế và xây dựng mã nguồn. Mẫu thiết kế không phải là một đoạn mã (code) cụ thể có thể sao chép trực tiếp, mà là một khuôn mẫu tư duy giúp các lập trình viên cấu trúc lại mã nguồn sao cho tối ưu, an toàn và dễ bảo trì nhất.
+Đối với một hệ thống được xây dựng theo kiến trúc phân tán SOA và Microservices, việc đảm bảo mã nguồn tuân thủ các nguyên lý hướng đối tượng (đặc biệt là 5 nguyên lý SOLID) là yêu cầu mang tính sống còn. Các Microservices cần phải dễ dàng mở rộng (Open/Closed Principle) và giảm thiểu tối đa sự phụ thuộc lẫn nhau (Dependency Inversion).
+Để đáp ứng các tiêu chuẩn khắt khe đó, hệ thống đặt lịch khám bệnh trong đề tài này đã chọn lọc và áp dụng các Mẫu thiết kế tiêu biểu từ bộ GoF (Gang of Four), được chia thành ba nhóm chính:
+Nhóm khởi tạo (Creational Patterns):
+ 
+Builder Pattern
+, được áp dụng để giải quyết bài toán khởi tạo các đối tượng có cấu trúc phức tạp, chứa nhiều tham số (như việc tạo cấu hình JSON Web Token hay khởi tạo thực thể Lịch hẹn) mà không làm mã nguồn trở nên rối rắm.
+Factory Method Pattern:
+ Được ứng dụng tại Payment Service nhằm tích hợp đa dạng các cổng thanh toán (VNPay, MoMo, Tiền mặt). Dựa trên nguyên lý Đóng/Mở (Open/Closed Principle), hệ thống sử dụng một PaymentFactory để tự động khởi tạo và trả về đối tượng xử lý thanh toán tương ứng dựa trên mã yêu cầu của client, giúp hệ thống dễ dàng mở rộng phương thức thanh toán mới trong tương lai mà không làm thay đổi logic cốt lõi hiện tại.
+Nhóm hành vi (Behavioral Patterns):
+ 
+State Pattern:
+ Được ứng dụng để quản lý các trạng thái chuyển đổi phức tạp của quy trình khám bệnh (từ lúc Chờ thanh toán, Xác nhận, đến khi Hoàn thành hoặc Hủy bỏ), loại bỏ hoàn toàn các câu lệnh điều kiện lồng nhau.
+Strategy Pattern:
+ Được sử dụng để tách bạch các thuật toán tính toán nghiệp vụ có thể thay đổi linh hoạt trong quá trình chạy (Runtime), tiêu biểu như thuật toán tính chi phí khám bệnh dựa trên các chính sách hoặc hạng mục dịch vụ khác nhau.
+(Chi tiết về cách thức cài đặt, sơ đồ lớp và sự vận dụng thực tế của từng Mẫu thiết kế này vào các Microservices cụ thể sẽ được trình bày chuyên sâu tại 
+Chương 3: Phân tích và Thiết kế hệ thống
+).
+CHƯƠNG 3: 
+PHÂN TÍCH VÀ THIẾT KẾ HỆ THỐNG
+3.1 Phân tích yêu cầu
+3.1.1 Xác định và mô tả các tác nhân
+ chính
+Trong hệ thống đặt lịch khám bệnh trực tuyến, các tác nhân là các thực thể (người dùng hoặc hệ thống khác) tương tác trực tiếp với các chức năng của website. Dựa trên phân tích nghiệp vụ, hệ thống bao gồm 3 tác nhân chính và 1 tác nhân hệ thống bên ngoài:
+3.1
+.1.1. Bệnh nhân (Patient)
+Mô tả: Đây là tác nhân chủ chốt, người sử dụng dịch vụ của hệ thống để thực hiện các thao tác liên quan đến nhu cầu chăm sóc sức khỏe.
+Vai trò: Tìm kiếm thông tin bác sĩ/chuyên khoa, thực hiện đặt lịch hẹn, thanh toán phí khám, theo dõi tiến trình lịch khám và xem kết quả bệnh án điện tử.
+Mục tiêu: Tiết kiệm thời gian chờ đợi, minh bạch hóa chi phí khám bệnh và dễ dàng truy xuất hồ sơ y tế cá nhân mọi lúc, mọi nơi.
+3.1
+.1.2
+. Bác sĩ (Doctor)
+Mô tả: Là nhân sự chuyên môn trực tiếp thực hiện thăm khám cho bệnh nhân.
+Vai trò: Quản lý lịch trình làm việc cá nhân, tiếp nhận bệnh nhân theo danh sách đã đặt trước, thực hiện thăm khám và cập nhật kết quả khám/bệnh án điện tử cho bệnh nhân trên hệ thống.
+Mục tiêu: Quản lý hiệu quả thời gian làm việc, nắm bắt thông tin bệnh nhân trước khi thăm khám và giảm thiểu các thủ tục hành chính giấy tờ.
+3.1
+.1.3
+. Quản trị viên (Administrator)
+Mô tả: Là người vận hành hệ thống, sở hữu quyền hạn cao nhất trong việc cấu hình và quản lý tài nguyên.
+Vai trò: Cấu hình danh mục chuyên khoa, quản lý hồ sơ bác sĩ, thiết lập quy tắc giá dịch vụ, và quản lý tài khoản người dùng để đảm bảo tính an toàn cũng như chất lượng vận hành của hệ thống.
+Mục tiêu: Đảm bảo hệ thống vận hành trơn tru, chính xác về dữ liệu và ngăn chặn các hành vi gây rối (spam đặt lịch, tài khoản ảo).
+Bảng tóm tắt tương tác của tác nhân với hệ thống:
+Tác nhân
+Phạm vi tương tác
+Chức năng tiêu biểu
+Bệnh nhân
+Frontend (Patient UI)
+Tìm kiếm, Đặt lịch, Thanh toán, Xem kết quả
+Bác sĩ
+Frontend (Doctor UI)
+Xem lịch, Check-in khám, Nhập bệnh án
+Admin
+Frontend (Admin UI)
+Quản lý chuyên khoa, bác sĩ, thống kê
+3.1.2 Biểu đồ ca sử dụng tổng quát
+Hình 3.1 Ca sử dụng tổng quát
+3.1.
+3
+ Mô tả chi tiết các ca sử dụng (use case) chính
+Dưới đây là mô tả chi tiết các luồng nghiệp vụ cốt lõi, tập trung vào sự tương tác giữa người dùng và các dịch vụ trong hệ thống Microservices.
+3.1.
+3
+.1
+. Use Case: Đặt lịch khám bệnh (Appointment Booking)
+Tác nhân:
+ Bệnh nhân.
+Mô tả:
+ Bệnh nhân lựa chọn khung giờ và chuyên khoa để tạo một lịch hẹn khám chính thức.
+Luồng sự kiện chính (Happy Path):
+Bệnh nhân chọn bác sĩ và xem danh sách slot trống (gọi tới Appointment Service).
+Bệnh nhân chọn khung giờ và nhập thông tin người khám.
+Hệ thống hiển thị thông tin phí khám (sử dụng Strategy Pattern để tính toán).
+Bệnh nhân thực hiện thanh toán qua Payment Service.
+Sau khi thanh toán thành công, Appointment Service tạo lịch, cập nhật trạng thái slot và gửi sự kiện tới Notification Service để thông báo cho bệnh nhân.
+Luồng thay thế (Alternative Path):
+ Nếu thanh toán thất bại, lịch hẹn bị hủy (hoặc trạng thái PENDING), slot không được khóa vĩnh viễn.
+3.1.
+3
+.2
+. Use Case: Tiếp nhận và nhập bệnh án (Medical Record Entry)
+Tác nhân:
+ Bác sĩ.
+Mô tả:
+ Bác sĩ thực hiện ghi nhận thông tin khám sau khi tiếp đón bệnh nhân.
+Luồng sự kiện chính:
+Bác sĩ xem danh sách bệnh nhân đã đặt lịch trong ngày (truy xuất từ Appointment Service).
+Bác sĩ 
+chọn chức năng “Vào khám”.
+Bác sĩ nhập nội dung chẩn đoán, đơn thuốc lên Medical Record Service.
+Sau khi nhấn lưu hồ sơ, hệ thống tự động cập nhật trạng thái Appointment từ “Xác nhận” sang “Hoàn thành”.
+Hệ thống tự động thông báo kết quả đã sẵn sàng cho bệnh nhân qua Notification Service.
+3.1.
+3
+.3. Use Case: Cấu hình lịch làm việc (Slot Configuration)
+Tác nhân:
+ Quản trị viên (Admin).
+Mô tả:
+ Thiết lập ca làm việc để hệ thống tự động sinh ra các slot khám bệnh.
+Luồng sự kiện chính:
+Người dùng chọn bác sĩ và thiết lập khung giờ cố định theo tuần (ví dụ: Thứ 2 từ 08:00 - 12:00).
+Hệ thống tính toán và tự động tạo các khoảng thời gian khám (ví dụ: mỗi slot 30 phút).
+Dữ liệu được lưu trữ tại Profile Service, đồng thời đồng bộ hóa các slot này để bệnh nhân có thể đặt lịch ngay lập tức.
+3.1.
+3
+.4. Use Case: Quản lý danh mục và giá dịch vụ
+Tác nhân:
+ Quản trị viên (Admin).
+Mô tả:
+ Cập nhật thông tin chuyên khoa và chính sách giá để đảm bảo tính thời sự của hệ thống.
+Luồng sự kiện chính:
+Admin truy cập module quản lý chuyên khoa/giá dịch vụ.
+Admin thêm mới hoặc chỉnh sửa cấu hình giá (ví dụ: điều chỉnh phí khám của Giáo sư cao hơn Bác sĩ thường).
+Hệ thống cập nhật cơ sở dữ liệu của Profile Service, thông tin mới này sẽ được Appointment Service áp dụng ngay trong các giao dịch đặt lịch tiếp theo.
+3.1.
+3
+.5. Use Case: Tra cứu lịch sử khám bệnh (Medical History)
+Tác nhân:
+ Bệnh nhân
+/ Bác sĩ
+Mô tả:
+ Bệnh nhân xem lại toàn bộ quá trình khám chữa bệnh của mình.
+Luồng sự kiện chính:
+Bệnh nhân truy cập mục "Lịch sử khám".
+Hệ thống gọi Medical Record Service để lấy danh sách phiếu khám.
+Bệnh nhân chọn một phiếu khám để xem chi tiết
+.
+3.2 Sơ đồ tuần tự của một số UseCase chính
+3.2.1 Sơ đồ tuần tự 
+UseCase: Đặt lịch khám bệnh (Appointment Booking)
+3.2.2 Sơ đồ tuần tự Use Case tiếp nhận và nhập bệnh án
+3.2.3 Sơ đồ tuần tự 
+Use Case: Cấu hình lịch làm việc (Slot Configuration)
+3.2.4 Sơ đồ tuần tự 
+Use Case: Quản lý danh mục và giá dịch vụ
+3.2.5 Sơ đồ tuần tự 
+Use Case: Tra cứu lịch sử khám bệnh (Medical History)
+3.3 Thiết kế kiến trúc
+Hệ thống đặt lịch khám bệnh được thiết kế theo kiến trúc Hướng dịch vụ (SOA) và mô hình Microservices, nhằm đảm bảo tính độc lập, khả năng mở rộng (scalability) và dễ dàng bảo trì. Kiến trúc tổng thể được chia thành các tầng (layers) rõ rệt như sau:
+3.3.1. Tầng Giao diện (Frontend Layer)
+Để tối ưu hóa trải nghiệm người dùng và đảm bảo an toàn thông tin, tầng Frontend được xây dựng bằng Next.js và phân tách dứt điểm thành hai phân hệ độc lập:
+Giao diện người dùng (Patient UI):
+ Phục vụ đối tượng Bệnh nhân/Khách hàng vãng lai. Tập trung vào các tính năng tìm kiếm, xem thông tin bác sĩ, đặt lịch trực tuyến, thanh toán và tra cứu hồ sơ cá nhân.
+Giao diện bệnh viện (Hospital UI):
+ Phục vụ nội bộ bao gồm Bác sĩ và Quản trị viên (Admin). Hệ thống cung cấp các Dashboard chuyên biệt để quản lý ca làm việc, tiếp nhận bệnh nhân, nhập kết quả khám và thống kê doanh thu.
+3.3.2. Cổng giao tiếp API (API Gateway)
+Toàn bộ các yêu cầu (requests) từ tầng Frontend (cả Giao diện người dùng lẫn Giao diện bệnh viện) đều không gọi trực tiếp xuống các dịch vụ ẩn bên dưới, mà phải đi qua một điểm trung chuyển duy nhất là 
+API Gateway
+.
+API Gateway đóng vai trò như một "người bảo vệ", thực hiện việc điều phối luồng (Routing), xác thực luồng truy cập bằng JWT (Authentication) và cân bằng tải (Load Balancing) trước khi đẩy request về đúng Microservice tương ứng.
+3.3.3. Tầng Dịch vụ (Microservices Layer)
+3.3
+.3
+.1 Luồng nghiệp vụ chính
+Luồng đặt lịch (Happy path)
+Khách hàng đăng ký / đăng nhập vào hệ thống.
+Khách hàng chọn chuyên khoa, bác sĩ, ngày giờ khám.
+Hệ thống kiểm tra slot còn trống của bác sĩ.
+Khách hàng xác nhận và thực hiện thanh toán.
+Hệ thống tạo lịch hẹn, cập nhật trạng thái slot.
+Hệ thống gửi thông báo xác nhận cho khách hàng.
+Bác sĩ xem danh sách bệnh nhân trong ngày.
+Sau khám, bác sĩ tạo kết quả khám, lưu vào hồ sơ bệnh nhân.
+Luồng thay thế / thất bại
+Slot đã bị đặt hết trước khi khách hàng xác nhận.
+Thanh toán thất bại → lịch hẹn không được tạo.
+Khách hàng hủy lịch trước giờ khám.
+Bác sĩ không còn làm việc vào ngày đã chọn.
+3.
+3.
+3.2 Thực thể nghiệp vụ
+Thực thể
+Mô tả
+User
+Tài khoản hệ thống (bệnh nhân, bác sĩ, admin)
+Patient
+Hồ sơ bệnh nhân (họ tên, ngày sinh, giới tính,...)
+Doctor
+Hồ sơ bác sĩ (chuyên khoa, bằng cấp, lịch làm việc...)
+Specialty
+Chuyên khoa (Tim mạch, Nhi khoa, Da liễu...)
+Appointment
+Lịch hẹn khám (bệnh nhân - bác sĩ - thời gian - trạng thái)
+DoctorSchedule
+Cấu hình ca làm việc cố định của bác sĩ (thứ, ca, giờ, thời lượng slot)
+MedicalRecord
+Kết quả khám (chuẩn đoán, đơn thuốc, ghi chú của bác sĩ)
+SlotLock
+Giữ chỗ
+Payment
+Thông tin thanh toán (số tiền, phương thức, trạng thái)
+Notification
+Thông báo gửi qua email/SMS
+3.3
+.3
+.3 Xác định và phân loại service
+1
+. Các service đề xuất
+Service
+Loại
+Trách nhiệm chính
+Identity Service
+Utility Service
+Xác thực đăng nhập, đăng ký, cấp/xác minh JWT token
+Profile/User Service
+Entity Service
+Quản lý hồ sơ bệnh nhân, bác sĩ, chuyên khoa (CRUD)
+Appointment Service
+Entity Service + Task Service
+Đặt lịch, hủy lịch, kiểm tra slot, xem lịch sử
+Medical Record Service
+Entity Service
+Tạo và tra cứu kết quả khám bệnh
+Payment Service
+Entity Service
+Xử lý giao dịch thanh toán, xác nhận thanh toán
+Notification Service
+Utility Service
+Gửi email/SMS xác nhận lịch, nhắc nhở, kết quả khám
+2
+. Phân loại theo SOA
+Entity Services (gắn với thực thể nghiệp vụ, tái sử dụng được)
+Profile/User Service
+Appointment Service
+Medical Record Service
+Payment Service
+Utility Services (chức năng hỗ trợ dùng chung)
+Identity Service — dùng cho mọi actor
+Notification Service — dùng chung cho nhiều nghiệp vụ khác nhau
+3. Trách nhiệm từng service
+a
+. Identity Service
+Trách nhiệm:
+Xử lý đăng ký tài khoản (bệnh nhân tự đăng ký, bác sĩ/admin do admin tạo).
+Xác thực đăng nhập, cấp JWT access token + refresh token.
+Xác minh token cho các service khác khi cần.
+Không nên làm:
+Không lưu thông tin hồ sơ chi tiết — đó là việc của Profile/User Service.
+b
+. Profile/User Service
+Trách nhiệm:
+Quản lý hồ sơ bệnh nhân: họ tên, ngày sinh, giới tính, số điện thoại.
+Quản lý hồ sơ bác sĩ: chuyên khoa, bằng cấp, giá khám.
+Quản lý cấu hình ca làm việc bác sĩ (bảng doctor_schedules): thứ trong tuần, ca sáng/chiều/tối, giờ bắt đầu/kết thúc, thời lượng mỗi slot khám.
+Sinh danh sách slot khả dụng theo ngày dựa trên doctor_schedules khi Appointment Service yêu cầu.
+Quản lý danh mục chuyên khoa.
+Admin CRUD toàn bộ dữ liệu hồ sơ.
+Không nên làm:
+Không xử lý xác thực, không đặt lịch.
+c
+. Appointment Service
+Đây là service trung tâm của toàn bộ hệ thống.
+Trách nhiệm:
+Nhận yêu cầu đặt lịch từ bệnh nhân.
+Gọi Profile/User Service để xác minh bác sĩ và bệnh nhân tồn tại.
+Kiểm tra slot còn trống của bác sĩ trong ngày được chọn.
+Gọi Payment Service để xác nhận thanh toán trước khi tạo lịch hẹn.
+Tạo lịch hẹn, cập nhật trạng thái slot.
+Gọi Notification Service gửi xác nhận.
+Cho bác sĩ xem danh sách bệnh nhân theo ngày.
+Cho bệnh nhân xem lịch sử đặt lịch.
+d
+. Medical Record Service
+Trách nhiệm:
+Bác sĩ tạo kết quả khám sau buổi khám (chuẩn đoán, đơn thuốc, ghi chú).
+Bệnh nhân tra cứu lịch sử kết quả khám của mình.
+Admin có thể truy xuất hồ sơ khi cần.
+Không nên làm:
+Không xử lý thanh toán, không gửi thông báo.
+e
+. Payment Service
+Trách nhiệm:
+Tạo phiên thanh toán (tích hợp VNPay, MoMo hoặc phương thức nội bộ).
+Xác nhận kết quả thanh toán (callback từ cổng thanh toán).
+Lưu lịch sử giao dịch.
+Trả trạng thái thanh toán về cho Appointment Service.
+Không nên làm:
+Không tạo lịch hẹn — đó là việc của Appointment Service.
+f
+. Notification Service
+Trách nhiệm:
+Gửi email/SMS xác nhận lịch hẹn.
+Gửi nhắc nhở trước giờ khám (24h, 1h).
+Gửi thông báo hủy lịch hoặc thay đổi lịch.
+Thông báo khi có kết quả khám mới.
+Không nên làm:
+Không chứa bất kỳ logic nghiệp vụ đặt lịch hay y tế nào.
+3.3.3.4 Quan hệ giữa các service
+Sơ đồ giao tiếp tổng quát:
+Client (Bệnh nhân / Bác sĩ / Admin)
+  |
+  v
+[ API GATEWAY ]  (Định tuyến Request & Kiểm tra xác thực JWT)
+  |
+  +---> Identity Service          (đăng nhập, đăng ký, cấp JWT token)
+  |
+  +---> Profile/User Service      (xem/sửa hồ sơ, quản lý chuyên khoa, bác sĩ)
+  |
+  +---> Appointment Service       (điều phối trung tâm)
+             |
+             +---> Profile/User Service    (xác minh bác sĩ, bệnh nhân, kiểm tra slot trống)
+             +---> Payment Service         (tạo phiên & xác nhận thanh toán)
+             +---> Medical Record Service  (liên kết trạng thái kết quả khám)
+             +---> Notification Service    (gửi email/SMS xác nhận / hủy)
+Lưu ý:
+Client không cần gọi trực tiếp tất cả service — nên đi qua API Gateway để xác thực JWT một lần.
+Appointment Service điều phối các service khác cho nghiệp vụ đặt lịch.
+Identity Service chỉ cần gọi khi đăng nhập/đăng ký — sau đó dùng JWT.
+3.3.4. Tầng Dữ liệu (Database Layer)
+Tuân thủ nguyên tắc 
+"Database per Service"
+, mỗi Microservice sẽ quản lý một cơ sở dữ liệu MySQL độc lập. Điều này giúp ngăn chặn tình trạng thắt cổ chai dữ liệu và đảm bảo nếu một dịch vụ gặp lỗi thì toàn bộ dữ liệu của hệ thống không bị ảnh hưởng. Các dữ liệu liên quan giữa các dịch vụ được ánh xạ với nhau thông qua "Liên kết mềm" (Soft References - dùng chung UUID) thay vì khóa ngoại cứng.
+3.4 Thiết kế Cơ sở dữ liệu
+3.4.1. Nguyên tắc thiết kế dữ liệu trong kiến trúc Microservices
+Hệ thống đặt lịch khám bệnh trực tuyến áp dụng mô hình lưu trữ 
+Database per Service
+ (Mỗi dịch vụ một cơ sở dữ liệu riêng) và sử dụng hệ quản trị cơ sở dữ liệu quan hệ MySQLNhằm đảm bảo tính độc lập tối đa và khả năng triển khai, mở rộng tự do của từng dịch vụ, cấu trúc dữ liệu được thiết kế dựa trên hai nguyên tắc cốt lõi:
+Tính đóng gói dữ liệu (Data Encapsulation):
+ Mỗi Microservice sở hữu một Schema/Database hoàn toàn riêng biệt. Các dịch vụ không được phép truy vấn trực tiếp (Direct Query) hoặc can thiệp vào bảng dữ liệu của nhau, mọi hoạt động trao đổi dữ liệu bắt buộc phải thông qua RESTful API ở tầng logic.
+Liên kết mềm (Soft References):
+ Hệ thống loại bỏ hoàn toàn các ràng buộc Khóa ngoại (Foreign Key) vật lý giữa các cơ sở dữ liệu khác nhau. Mối quan hệ giữa các thực thể thuộc các dịch vụ khác nhau được duy trì dưới dạng "Liên kết mềm" thông qua mã định danh (ID/UUI. Điều này đảm bảo tính toàn vẹn của kiến trúc phân tán, ngăn chặn hiện tượng "lỗi dây chuyền" (Cascading Failures) khi một cơ sở dữ liệu gặp sự cố.
+3.4.2 Cấu hình chi tiết các cơ sở dữ liệu
+1. Cơ sở dữ liệu: clinic_identity (Thuộc Identity Service)
+Nhiệm vụ cốt lõi là lưu trữ thông tin phục vụ công tác xác thực và phân quyền tài khoản (Authentication & Authorization). Để đảm bảo tính phân tách trách nhiệm, cơ sở dữ liệu này tuyệt đối không lưu trữ thông tin hồ sơ chi tiết của người dùng.
+Hình 3.2 Cơ sở dữ liệu clinic_identity
+ 
+a. Bảng users
+Thuộc tính
+Kiểu dữ liệu
+Mô tả
+id
+VARCHAR/UUID, Primary Key
+Mã định danh duy nhất, được dùng làm khóa tham chiếu mềm cho toàn bộ hệ thống.
+email
+VARCHAR, Unique
+Địa chỉ email dùng làm tên đăng nhập.
+password_hash
+VARCHAR
+Chuỗi mật khẩu đã qua mã hóa bảo mật.
+role
+ENUM
+Vai trò của tài khoản trong hệ thống ('PATIENT', 'DOCTOR', 'ADMIN').
+created_at
+TIMESTAMP
+Thời gian khởi tạo tài khoản.
+is_active
+BOOLEAN
+Trạng thái hoạt động của tài khoản.
+Bảng 3.1 Users
+b. Bảng sessions
+Thuộc tính
+Kiểu dữ liệu
+Mô tả
+id
+VARCHAR/UUID, Primary Key
+Mã định danh duy nhất, được dùng làm khóa tham chiếu mềm cho toàn bộ hệ thống.
+userId
+VARCHAR, 
+ForeignKey
+Khóa ngoại liên kết với bảng userId
+expries_at
+DATETIME
+Thời gian hết hạn
+refresh_token
+VARCHAR
+Chuỗi refresh_token
+created_at
+TIMESTAMP
+Thời gian khởi tạo tài khoản.
+Bảng 
+3.2 Sessions
+2. Cơ sở dữ liệu: clinic_profile (Thuộc Profile/User Service)
+Nhiệm vụ quản lý toàn bộ thông tin hồ sơ cá nhân của các tác nhân, danh mục y khoa chuyên biệt và lịch trực cố định của đội ngũ y bác sĩ.
+Hình 3.3 
+Cơ sở dữ liệu clinic_profile
+ 
+a. 
+Bảng specialties (Danh mục Chuyên khoa):
+Thuộc tính
+Kiểu dữ liệu
+Mô tả
+id
+INT, Primary Key, Auto Increment
+Mã định danh chuyên khoa.
+name
+VARCHAR
+Tên chuyên khoa.
+description
+TEXT
+Nội dung mô tả chuyên khoa.
+image_url
+VARCHAR
+Đường dẫn hình ảnh minh họa chuyên khoa.
+Bảng
+ 3.3
+ 
+S
+pecialties
+ 
+b. 
+Bảng patients (Hồ sơ Bệnh nhân):
+Thuộc tính
+Kiểu dữ liệu
+Mô tả
+user_id
+VARCHAR, Primary Key
+Khóa tham chiếu mềm tới clinic_identity.users.id.
+full_name
+VARCHAR
+Họ và tên đầy đủ của bệnh nhân.
+dob
+DATE
+Ngày tháng năm sinh.
+gender
+ENUM
+Giới tính ('MALE', 'FEMALE', 'OTHER').
+phone
+VARCHAR
+Số điện thoại liên hệ.
+Bảng
+ 3.4
+ 
+Patients
+c. 
+Bảng doctors (Hồ sơ Bác sĩ):
+Thuộc tính
+Kiểu dữ liệu
+Mô tả
+user_id
+VARCHAR, Primary Key
+Khóa tham chiếu mềm tới clinic_identity.users.id.
+specialty_id
+INT
+Khóa ngoại tới bảng specialties.id.
+full_name
+VARCHAR
+Họ và tên đầy đủ của bác sĩ.
+degree
+VARCHAR
+Bằng cấp (Ví dụ: Thạc sĩ, Tiến sĩ).
+experience_years
+INT
+Số năm kinh nghiệm công tác.
+price
+DECIMAL
+Giá khám dịch vụ niêm yết.
+Bảng
+ 3.5
+ 
+Doctors
+d. 
+Bảng doctor_schedules (Cấu hình ca làm việc cố định):
+Thuộc tính
+Kiểu dữ liệu
+Mô tả
+id
+INT, Primary Key, Auto Increment
+Mã định danh cấu hình lịch làm việc.
+doctor_id
+VARCHAR
+Khóa ngoại tới doctors.user_id.
+day_of_week
+INT
+Định nghĩa thứ trong tuần từ 0 (Chủ nhật) đến 6 (Thứ 7).
+shift_type
+ENUM
+Phân loại ca trực ('MORNING', 'AFTERNOON', 'EVENING').
+start_time
+TIME
+Thời gian bắt đầu ca khám.
+end_time
+TIME
+Thời gian kết thúc ca khám.
+slot_duration
+INT
+Số phút quy định cho mỗi ca khám (Ví dụ: 30 phút).
+is_active
+BOOLEAN
+Trạng thái kích hoạt ca trực.
+created_at
+TIMESTAMP
+Thời gian tạo cấu hình.
+updated_at
+TIMESTAMP
+Thời gian cập nhật cấu hình.
+Bảng
+ 3.6
+ 
+Doctor Schedules
+3. Cơ sở dữ liệu: clinic_appointment (Thuộc Appointment Service)
+Đóng vai trò trung tâm, quản lý và điều phối toàn bộ các giao dịch đặt lịch hẹn khám thực tế và trạng thái giữ chỗ tạm thời của bệnh nhân.
+Hình 3.4 
+Cơ sở dữ liệu clinic_appointment
+ 
+a. 
+Bảng appointments (Quản lý lịch hẹn):
+Thuộc tính
+Kiểu dữ liệu
+Mô tả
+id
+INT, Primary Key, Auto Increment
+Mã định danh lịch hẹn.
+patient_id
+VARCHAR
+Khóa tham chiếu mềm sang hồ sơ bệnh nhân clinic_profile.patients.user_id.
+doctor_id
+VARCHAR
+Khóa tham chiếu mềm sang hồ sơ bác sĩ clinic_profile.doctors.user_id.
+specialty_id
+INT
+Lưu trữ dư thừa dữ liệu (Denormalization) nhằm tối ưu hóa tốc độ truy vấn, hạn chế lời gọi chéo sang Profile Service.
+appointment_date
+DATE
+Ngày hẹn khám cụ thể.
+slot_time
+TIME
+Khung giờ khám chính xác.
+status
+ENUM
+Trạng thái lịch hẹn ('PENDING_PAYMENT', 'CONFIRMED', 'COMPLETED', 'CANCELLED').
+created_at
+TIMESTAMP
+Thời gian tạo lịch hẹn.
+patient_name
+VARCHAR(255)
+Tên của bệnh nhân (Lưu trữ dư thừa để hiển thị nhanh không cần gọi chéo service, hoặc dùng cho người đặt hộ).
+patient_phone
+VARCHAR(255)
+Số điện thoại liên hệ của bệnh nhân.
+notes
+TEXT
+Ghi chú thêm của bệnh nhân cho lịch hẹn (triệu chứng, yêu cầu đặc biệt,...).
+Bảng 3.7 Appointments
+b. 
+Bảng slot_locks (Giữ chỗ tạm thời):
+Thuộc tính
+Kiểu dữ liệu
+Mô tả
+id
+INT, Primary Key, Auto Increment
+Mã định danh bản ghi giữ chỗ.
+doctor_id
+VARCHAR
+Khóa tham chiếu tới bác sĩ.
+lock_date
+DATE
+Ngày khóa slot.
+slot_time
+TIME
+Khung giờ khóa slot.
+patient_id
+VARCHAR
+Khóa tham chiếu tới bệnh nhân giữ chỗ.
+expires_at
+TIMESTAMP
+Thời điểm hết hạn giữ chỗ.
+created_at
+TIMESTAMP
+Thời gian tạo bản ghi giữ chỗ.
+Bảng 3.8 Slot Locks
+4. Cơ sở dữ liệu: clinic_medical_record (Thuộc Medical Record Service)
+Nhiệm vụ quản lý thông tin bệnh án điện tử, lưu trữ chi tiết các kết quả chẩn đoán và đơn thuốc sau khi phiên khám kết thúc.
+Hình 3.5 
+Cơ sở dữ liệu clinic_medical_record
+ 
+Bảng medical_records (Hồ sơ bệnh án):
+Thuộc tính
+Kiểu dữ liệu
+Mô tả
+id
+INT, Primary Key, Auto Increment
+Mã định danh hồ sơ bệnh án.
+appointment_id
+INT, Unique
+Khóa tham chiếu mềm sang lịch hẹn gốc.
+patient_id
+VARCHAR
+Khóa tham chiếu mềm sang hồ sơ bệnh nhân.
+doctor_id
+VARCHAR
+Khóa tham chiếu mềm sang hồ sơ bác sĩ.
+doctor_note
+TEXT
+Lời dặn của bác sĩ
+diagnose
+VARCHAR
+Nội dung chẩn đoán bệnh.
+prescription
+TEXT
+Đơn thuốc của bác sĩ
+created_at
+TIMESTAMP
+Thời gian tạo hồ sơ.
+result_url
+VARCHAR(255)
+Đường dẫn (URL) lưu trữ file kết quả khám bệnh, hình ảnh chụp chiếu 
+Bảng 3.9 Medical Records
+5. Cơ sở dữ liệu: clinic_payment (Thuộc Payment Service)
+Chịu trách nhiệm lưu vết và quản lý trạng thái của các giao dịch tài chính trực tuyến diễn ra trong hệ thống.
+Hình 3.6 
+Cơ sở dữ liệu: clinic_payment
+ 
+Bảng payments (Giao dịch thanh toán):
+Thuộc tính
+Kiểu dữ liệu
+Mô tả
+id
+BIGINT, Primary Key
+Mã định danh giao dịch.
+appointment_id
+BIGINT
+Khóa tham chiếu mềm sang lịch hẹn thanh toán.
+amount
+DECIMAL
+Số tiền giao dịch.
+payment_method
+ENUM
+Phương thức thanh toán ('VNPAY', 'MOMO').
+payment_url
+TEXT
+Đường dẫn tới cổng thanh toán
+transaction_no
+VARCHAR
+Mã đối soát trả về từ cổng thanh toán bên thứ ba.
+status
+ENUM
+Trạng thái giao dịch ('PENDING', 'SUCCESS', 'FAILED').
+created_at
+TIMESTAMP
+Thời gian tạo giao dịch.
+updated_at
+TIMESTAMP
+Thời gian cập nhật giao dịch
+patient_email
+VARCHAR(255)
+Email của bệnh nhân (Dùng để gửi biên lai điện tử/email xác nhận thanh toán).
+patient_name
+VARCHAR(255)
+Tên của bệnh nhân (Lưu dư thừa để hiển thị lịch sử giao dịch mà không cần gọi chéo Profile Service).
+doctor_name
+VARCHAR(255)
+Tên bác sĩ phụ trách khám.
+specialty
+VARCHAR(255)
+Tên chuyên khoa khám bệnh.
+appointment_date
+DATE
+Ngày hẹn khám.
+slot_time
+TIME
+Khung giờ khám bệnh.
+Bảng 3.10 Payments
+6. Cơ sở dữ liệu: clinic_notification (Thuộc Notification Service)
+Lưu trữ lịch sử, nhật ký gửi thông báo nhằm mục đích phục vụ công tác đối soát hệ thống.
+Hình 3.7 
+Cơ sở dữ liệu: clinic_notification
+ 
+Bảng notification_logs (Lịch sử gửi thông báo):
+Thuộc tính
+Kiểu dữ liệu
+Mô tả
+id
+INT, Primary Key, Auto Increment
+Mã định danh nhật ký gửi.
+recipient_id
+VARCHAR
+Khóa tham chiếu mềm tới người nhận thông báo.
+error_message
+VARCHAR
+Error message
+recipient_email
+VARCHAR
+Email người nhận
+type
+ENUM
+Loại hình gửi thông báo ('EMAIL', 'SMS').
+title
+VARCHAR
+Tiêu đề của thông báo.
+content
+TEXT
+Nội dung chi tiết của thông báo.
+status
+ENUM
+Trạng thái gửi ('SENT', 'FAILED').
+created_at
+TIMESTAMP
+Thời gian gửi thông báo.
+Bảng 3.11 Notification Logs
+3.5. Thiết kế giao diện lập trình ứng dụng (RESTful API)
+Trong kiến trúc Microservices, các dịch vụ không chia sẻ trực tiếp cơ sở dữ liệu mà giao tiếp với nhau và với tầng Giao diện (Frontend) thông qua các giao diện lập trình ứng dụng (API). Hệ thống áp dụng nghiêm ngặt tiêu chuẩn 
+RESTful API
+, sử dụng định dạng dữ liệu JSON và tuân thủ các phương thức HTTP (GET, POST, PUT, PATCH, DELETE) tương ứng với các thao tác tạo, đọc, cập nhật, xóa (CRUD).
+Dưới đây là danh sách toàn bộ các Endpoint (điểm cuối) của hệ thống, được phân nhóm chi tiết theo từng Microservice và quy hoạch định tuyến (Routing) rõ ràng thông qua API Gateway:
+3.5.1. Identity Service (Xác thực và Phân quyền)
+Cổng Port nội bộ:
+ 8081
+Route Gateway:
+ /api/auth/
+Nhiệm vụ:
+ Chịu trách nhiệm tiếp nhận người dùng, cấp phát, xác thực và thu hồi JSON Web Token (JWT).
+HTTP Method
+Endpoint
+Chức năng nghiệp vụ
+Quyền truy cập
+POST
+/api/auth/register
+Đăng ký tài khoản mới (dành cho bệnh nhân).
+Public
+POST
+/api/auth/login
+Đăng nhập, trả về JWT Access và Refresh Token.
+Public
+POST
+/api/auth/logout
+Thu hồi Refresh Token / Đăng xuất hệ thống.
+Authenticated
+POST
+/api/auth/refresh
+Làm mới Access Token bằng Refresh Token.
+Public
+POST
+/api/auth/validate
+Xác thực tính hợp lệ của token (dùng nội bộ).
+Internal/Gateway
+GET
+/api/auth/get-me
+Lấy thông tin tài khoản người dùng đang đăng nhập.
+Authenticated
+POST
+/api/auth/change-password
+Thay đổi mật khẩu người dùng.
+Authenticated
+3.5.2. Profile Service (Quản lý Hồ sơ & Lịch trực)
+Cổng Port nội bộ:
+ 8082
+Route Gateway:
+ /api/doctors/, /api/patients/, /api/specialties/
+Nhiệm vụ:
+ Cung cấp dữ liệu danh mục chuyên khoa, quản lý hồ sơ cá nhân và cấu hình ca làm việc của y bác sĩ.
+HTTP Method
+Endpoint
+Chức năng nghiệp vụ
+Quyền truy cập
+GET
+/api/specialties
+Lấy danh sách tất cả chuyên khoa.
+Public
+GET
+/api/specialties/{id}
+Lấy thông tin chuyên khoa chi tiết theo ID.
+Public
+POST
+/api/specialties
+Tạo chuyên khoa y tế mới.
+ADMIN
+PUT
+/api/specialties/{id}
+Cập nhật thông tin chuyên khoa.
+ADMIN
+DELETE
+/api/specialties/{id}
+Xóa chuyên khoa khỏi hệ thống.
+ADMIN
+GET
+/api/patients/{userId}
+Lấy thông tin hồ sơ bệnh nhân theo ID người dùng.
+PATIENT, ADMIN
+POST
+/api/patients
+Tạo mới hồ sơ thông tin bệnh nhân.
+Authenticated
+PUT
+/api/patients
+Cập nhật hồ sơ thông tin bệnh nhân.
+PATIENT
+GET
+/api/doctors
+Lấy danh sách bác sĩ (có hỗ trợ lọc theo specialtyId).
+Public
+GET
+/api/doctors/{userId}
+Lấy thông tin hồ sơ bác sĩ theo ID.
+Public
+POST
+/api/doctors
+Tạo mới hồ sơ bác sĩ.
+ADMIN
+PUT
+/api/doctors/{userId}
+Cập nhật thông tin bác sĩ.
+ADMIN, DOCTOR
+DELETE
+/api/doctors/{userId}
+Xóa hồ sơ bác sĩ theo ID.
+ADMIN
+GET
+/api/doctors/{doctorId}/schedules
+Lấy danh sách lịch làm việc cố định của một bác sĩ.
+ADMIN, DOCTOR
+POST
+/api/doctors/{doctorId}/schedules
+Tạo lịch làm việc mới cho bác sĩ.
+ADMIN, DOCTOR
+PUT
+/api/doctors/{doctorId}/schedules/{scheduleId}
+Cập nhật ca làm việc của bác sĩ.
+ADMIN, DOCTOR
+DELETE
+/api/doctors/{doctorId}/schedules/{scheduleId}
+Xóa ca làm việc của bác sĩ.
+ADMIN, DOCTOR
+3.5.3. Appointment Service (Quản lý Đặt lịch)
+Cổng Port nội bộ:
+ 8083
+Route Gateway:
+ /api/appointments/, /api/slots/
+Nhiệm vụ:
+ Dịch vụ lõi điều phối các nghiệp vụ đặt khám, giữ chỗ và cập nhật vòng đời lịch hẹn.
+HTTP Method
+Endpoint
+Chức năng nghiệp vụ
+Quyền truy cập
+POST
+/api/appointments
+Tạo cuộc hẹn khám bệnh mới.
+PATIENT
+GET
+/api/appointments/{id}
+Lấy chi tiết thông tin một cuộc hẹn theo ID.
+PATIENT, DOCTOR
+GET
+/api/appointments
+Lấy danh sách cuộc hẹn (dữ liệu trả về tùy theo Role).
+Authenticated
+PUT
+/api/appointments/{id}/confirm
+Xác nhận lịch khám (sau khi thanh toán).
+Internal/Admin
+PUT
+/api/appointments/{id}/complete
+Hoàn thành ca khám bệnh.
+DOCTOR
+PUT
+/api/appointments/{id}/cancel
+Hủy lịch hẹn khám.
+PATIENT, ADMIN
+POST
+/api/slots/lock
+Khóa/Giữ chỗ slot giờ khám tạm thời.
+PATIENT
+GET
+/api/slots/available
+Lấy danh sách khung giờ trống của bác sĩ theo ngày.
+Public / PATIENT
+3.5.4. Medical Record Service (Quản lý Bệnh án)
+Cổng Port nội bộ:
+ 8084
+Route Gateway:
+ /api/medical-records/
+Nhiệm vụ:
+ Lưu trữ và trích xuất hồ sơ bệnh án, đơn thuốc sau quá trình thăm khám.
+HTTP Method
+Endpoint
+Chức năng nghiệp vụ
+Quyền truy cập
+POST
+/api/medical-records
+Bác sĩ tạo hồ sơ bệnh án/đơn thuốc mới.
+DOCTOR
+GET
+/api/medical-records/patient/me
+Bệnh nhân xem lịch sử các bệnh án của chính mình.
+PATIENT
+GET
+/api/medical-records/{id}
+Xem chi tiết hồ sơ bệnh án theo ID.
+PATIENT, DOCTOR
+GET
+/api/medical-records/appointment/{appointmentId}
+Lấy thông tin bệnh án gắn liền với mã cuộc hẹn.
+Authenticated
+GET
+/api/medical-records/patient/{patientId}
+Bác sĩ/Admin xem lịch sử bệnh án của một bệnh nhân.
+DOCTOR, ADMIN
+3.5.5. Payment Service (Thanh toán trực tuyến)
+Cổng Port nội bộ:
+ 8085
+Route Gateway:
+ /api/payments/
+Nhiệm vụ:
+ Xử lý các giao dịch tài chính, tích hợp cổng thanh toán VNPay và MoMo.
+HTTP Method
+Endpoint
+Chức năng nghiệp vụ
+Quyền truy cập
+POST
+/api/payments
+Tạo phiên thanh toán mới (trả về URL VNPay/MoMo).
+PATIENT
+GET
+/api/payments/appointment/{appointmentId}
+Lấy thông tin và trạng thái thanh toán của cuộc hẹn.
+Authenticated
+POST
+/api/payments/callback/vnpay
+Webhook nhận kết quả thanh toán từ VNPay (IPN).
+Public/S2S
+GET
+/api/payments/vnpay-return
+Trang nhận kết quả và chuyển hướng người dùng VNPay.
+Public
+POST
+/api/payments/callback/momo
+Webhook nhận kết quả giao dịch thanh toán từ MoMo.
+Public/S2S
+3.5.6. Notification Service (Thông báo sự kiện)
+Cổng Port nội bộ:
+ 8086
+Route Gateway:
+ /api/notifications/
+Nhiệm vụ:
+ Dịch vụ nhận tín hiệu bất đồng bộ để gửi email/SMS thông báo tới người dùng.
+HTTP Method
+Endpoint
+Chức năng nghiệp vụ
+Quyền truy cập
+POST
+/api/notifications/send
+Gửi thông báo email đơn giản.
+Internal
+POST
+/api/notifications/appointment-confirmation
+Gửi email xác nhận đặt lịch khám thành công.
+Internal
+POST
+/api/notifications/medical-result
+Gửi email thông báo đã có kết quả bệnh án/đơn thuốc.
+Internal
+Ghi chú: Để đảm bảo an toàn thông tin, tất cả các Endpoint (ngoại trừ các endpoint có quyền truy cập Public hoặc Webhook từ bên thứ ba) đều bắt buộc phải đi qua API Gateway để thực hiện bước tiền xử lý (Pre-processing) xác thực chuỗi Bearer Token. Mọi request không hợp lệ sẽ bị API Gateway ngăn chặn và trả về mã lỗi 401 (Unauthorized) trước khi chạm tới các Microservices bên trong.
+3.6. Cài đặt chi tiết các Mẫu thiết kế (Design Patterns)
+Nhằm minh chứng cho việc áp dụng các nguyên lý thiết kế phần mềm vào thực tế, phần này sẽ trình bày chi tiết cách thức cài đặt các Mẫu thiết kế (Design Patterns) bằng ngôn ngữ Java và framework Spring Boot tại các Microservices cốt lõi.
+3.6.1. Builder Pattern (Mẫu Xây dựng)
+Vị trí áp dụng:
+ Toàn bộ các Entity phức tạp trong hệ thống, tiêu biểu là Appointment tại Appointment Service.
+Lý do:
+ Đối tượng Lịch hẹn chứa rất nhiều thuộc tính (Id, PatientId, DoctorId, Date, Time, Status...). Việc sử dụng Constructor thông thường sẽ gây ra tình trạng rối rắm khi truyền tham số. Hệ thống áp dụng thư viện Lombok (@Builder) để triển khai mẫu thiết kế này, giúp mã nguồn khởi tạo đối tượng trở nên tường minh, dễ đọc và an toàn.
+Đoạn mã minh họa (Java):
+// 
+1. Khai báo Builder tại lớp Entity
+@Entity
+@Table(name = "users")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "VARCHAR(36)")
+    private String id;
+    @Column(name = "email", unique = true, nullable = false)
+    private String email;
+    @Column(name = "password_hash", nullable = false)
+    private String passwordHash;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false)
+    private Role role;
+    @Column(name = "is_active")
+    private Boolean isActive;
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
+    // Hàm này sẽ tự động chạy TRƯỚC KHI insert (lưu) dòng này xuống Database
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now(); // Tự động lấy giờ hiện tại
+        if (this.isActive == null) {
+            this.isActive = true; // Mặc định tài khoản mới tạo ra là được active (hoạt động)
+        }
+    }
+// 2. Sử dụng Builder để khởi tạo đối tượng tại tầng Service
+public void register(RegisterRequest request) {
+        if (userRepository.existsByEmail(request.getEmail())) {
+            throw new CustomException(HttpStatus.CONFLICT.value(), "Email is already in use");
+        }
+        User user = User.builder()
+                .email(request.getEmail())
+                .passwordHash(passwordEncoder.encode(request.getPassword()))
+                .role(Role.PATIENT) // Mặc định đăng ký mới là Bệnh nhân
+                .isActive(true)
+                .build();
+        userRepository.save(user);
+    }
+3.6.2. Factory Method Pattern (Mẫu Phương thức Khởi tạo)
+Vị trí áp dụng:
+ Payment Service (Xử lý đa dạng cổng thanh toán).
+Lý do:
+ Dựa trên nguyên lý OCP (Open/Closed Principle), khi hệ thống cần thêm phương thức thanh toán mới (ví dụ: ZaloPay, PayPal), mã nguồn cũ không được phép thay đổi. 
+PaymentFactory sẽ nhận mã phương thức thanh toán từ yêu cầu của Client và tự động quyết định xem nên khởi tạo lớp xử lý VNPayProcessor hay MoMoProcessor.
+// 1. Lớp Factory:
+ 
+Lớp này đóng vai trò là Factory chịu trách nhiệm khởi tạo / lựa chọn Gateway tương ứng dựa vào chuỗi phương thức thanh toán (`VNPAY`, `MOMO`).
+@Component
+@RequiredArgsConstructor
+public class PaymentFactory {
+    // Spring tự động thu thập tất cả Bean của interface PaymentGateway vào Map này
+    private final Map<String, PaymentGateway> gateways;
+    public PaymentGateway getGateway(String method) {
+        PaymentGateway gateway = gateways.get(method.toUpperCase());
+        if (gateway == null) {
+            throw new IllegalArgumentException("Phương thức thanh toán không hỗ trợ: " + method);
+        }
+        return gateway;
+    }
+}
+// 2. Interface chung (Abstract Product):
+ 
+Định nghĩa các hàm chung cho mọi cổng thanh toán:
+public interface PaymentGateway {
+    String createPaymentUrl(Long appointmentId, BigDecimal amount, String orderInfo);
+    boolean verifyCallback(Map<String, String> params);
+    String extractTransactionNo(Map<String, String> params);
+    boolean isPaymentSuccess(Map<String, String> params);
+}
+// 3. Các lớp hiện thực chi tiết (Concrete Products):
+@Component("VNPAY")  // Bean name = tên phương thức thanh toán -> Factory dùng để tra cứu
+public class VNPayGateway implements PaymentGateway {
+    @Value("${vnpay.tmn-code}")
+    private String tmnCode;
+    @Value("${vnpay.hash-secret}")
+    private String hashSecret;
+    @Value("${vnpay.url}")
+    private String vnpayUrl;
+    @Value("${vnpay.return-url}")
+    private String returnUrl;
+    @Override
+    public String createPaymentUrl(Long appointmentId, BigDecimal amount, String orderInfo) {
+        try {
+            String vnpTxnRef = appointmentId + "-" + System.currentTimeMillis();
+            String vnpCreateDate = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+            // VNPay yêu cầu số tiền x100 (không có dấu phẩy), đơn vị VND
+            long vnpAmount = amount.longValue() * 100;
+            Map<String, String> params = new TreeMap<>(); // TreeMap tự sort key -> quan trọng cho chữ ký
+            params.put("vnp_Version", "2.1.0");
+            params.put("vnp_Command", "pay");
+            params.put("vnp_TmnCode", tmnCode);
+            params.put("vnp_Amount", String.valueOf(vnpAmount));
+            params.put("vnp_CurrCode", "VND");
+            params.put("vnp_TxnRef", vnpTxnRef);
+            params.put("vnp_OrderInfo", orderInfo);
+            params.put("vnp_OrderType", "other");
+            params.put("vnp_Locale", "vn");
+            params.put("vnp_ReturnUrl", returnUrl);
+            params.put("vnp_IpAddr", "127.0.0.1");
+            params.put("vnp_CreateDate", vnpCreateDate);
+            // Tạo chuỗi query và chữ ký HMAC-SHA512
+            StringBuilder queryBuilder = new StringBuilder();
+            for (Map.Entry<String, String> entry : params.entrySet()) {
+                queryBuilder.append(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8));
+                queryBuilder.append("=");
+                queryBuilder.append(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8));
+                queryBuilder.append("&");
+            }
+            String queryString = queryBuilder.substring(0, queryBuilder.length() - 1);
+            String secureHash = hmacSHA512(hashSecret, queryString);
+            String paymentUrl = vnpayUrl + "?" + queryString + "&vnp_SecureHash=" + secureHash;
+            log.info("Đã tạo VNPay URL cho appointmentId={}", appointmentId);
+            return paymentUrl;
+        } catch (Exception e) {
+            log.error("Lỗi tạo VNPay URL: {}", e.getMessage());
+            throw new RuntimeException("Không thể tạo link thanh toán VNPay: " + e.getMessage());
+        }
+    }
+    @Override
+    public boolean verifyCallback(Map<String, String> params) {
+        String receivedHash = params.get("vnp_SecureHash");
+        if (receivedHash == null) return false;
+        // Lấy ra tất cả params trừ chữ ký, sort, rồi tạo lại chữ ký để so sánh
+        Map<String, String> verifyParams = new TreeMap<>(params);
+        verifyParams.remove("vnp_SecureHash");
+        verifyParams.remove("vnp_SecureHashType");
+        StringBuilder queryBuilder = new StringBuilder();
+        for (Map.Entry<String, String> entry : verifyParams.entrySet()) {
+            queryBuilder.append(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8));
+            queryBuilder.append("=");
+            queryBuilder.append(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8));
+            queryBuilder.append("&");
+        }
+        String queryString = queryBuilder.substring(0, queryBuilder.length() - 1);
+        String expectedHash = hmacSHA512(hashSecret, queryString);
+        boolean match = expectedHash.equalsIgnoreCase(receivedHash);
+        if (!match) {
+            log.warn("VNPay signature mismatch!");
+            log.warn("Query string used for hash: {}", queryString);
+            log.warn("Expected hash: {}", expectedHash);
+            log.warn("Received hash: {}", receivedHash);
+        }
+        return match;
+    }
+    @Override
+    public String extractTransactionNo(Map<String, String> params) {
+        return params.get("vnp_TransactionNo");
+    }
+    @Override
+    public boolean isPaymentSuccess(Map<String, String> params) {
+        // VNPay trả "00" là thành công
+        return "00".equals(params.get("vnp_ResponseCode"));
+    }
+    // ---- Helper ----
+    private String hmacSHA512(String key, String data) {
+        try {
+            Mac mac = Mac.getInstance("HmacSHA512");
+            SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "HmacSHA512");
+            mac.init(secretKey);
+            byte[] hash = mac.doFinal(data.getBytes(StandardCharsets.UTF_8));
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                hexString.append(String.format("%02x", b));
+            }
+            return hexString.toString();
+        } catch (Exception e) {
+            throw new RuntimeException("Lỗi tạo HMAC-SHA512: " + e.getMessage());
+        }
+    }
+}
+@Component("MOMO")  // Bean name = "MOMO" -> Factory tra cứu theo key này
+public class MoMoGateway implements PaymentGateway {
+    @Value("${momo.partner-code}")
+    private String partnerCode;
+    @Value("${momo.access-key}")
+    private String accessKey;
+    @Value("${momo.secret-key}")
+    private String secretKey;
+    @Value("${momo.endpoint}")
+    private String endpoint;
+    @Value("${momo.redirect-url}")
+    private String redirectUrl;
+    @Value("${momo.ipn-url}")
+    private String ipnUrl;
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final HttpClient httpClient = HttpClient.newHttpClient();
+    @Override
+    public String createPaymentUrl(Long appointmentId, BigDecimal amount, String orderInfo) {
+        try {
+            String requestId = UUID.randomUUID().toString();
+            String orderId = "APPT-" + appointmentId + "-" + System.currentTimeMillis();
+            // Tạo chữ ký HMAC-SHA256 theo yêu cầu MoMo
+            String rawSignature = "accessKey=" + accessKey
+                    + "&amount=" + amount.longValue()
+                    + "&extraData="
+                    + "&ipnUrl=" + ipnUrl
+                    + "&orderId=" + orderId
+                    + "&orderInfo=" + orderInfo
+                    + "&partnerCode=" + partnerCode
+                    + "&redirectUrl=" + redirectUrl
+                    + "&requestId=" + requestId
+                    + "&requestType=payWithMethod";
+            String signature = hmacSHA256(secretKey, rawSignature);
+            Map<String, Object> requestBody = new HashMap<>();
+            requestBody.put("partnerCode", partnerCode);
+            requestBody.put("accessKey", accessKey);
+            requestBody.put("requestId", requestId);
+            requestBody.put("amount", amount.longValue());
+            requestBody.put("orderId", orderId);
+            requestBody.put("orderInfo", orderInfo);
+            requestBody.put("redirectUrl", redirectUrl);
+            requestBody.put("ipnUrl", ipnUrl);
+            requestBody.put("extraData", "");
+            requestBody.put("requestType", "payWithMethod");
+            requestBody.put("signature", signature);
+            requestBody.put("lang", "vi");
+            String requestJson = objectMapper.writeValueAsString(requestBody);
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(endpoint))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(requestJson))
+                    .build();
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            Map<?, ?> responseBody = objectMapper.readValue(response.body(), Map.class);
+            String payUrl = (String) responseBody.get("payUrl");
+            if (payUrl == null) {
+                throw new RuntimeException("MoMo không trả về payUrl: " + responseBody.get("message"));
+            }
+            log.info("Đã tạo MoMo URL cho appointmentId={}", appointmentId);
+            return payUrl;
+        } catch (Exception e) {
+            log.error("Lỗi tạo MoMo URL: {}", e.getMessage());
+            throw new RuntimeException("Không thể tạo link thanh toán MoMo: " + e.getMessage());
+        }
+    }
+    @Override
+    public boolean verifyCallback(Map<String, String> params) {
+        // Verify chữ ký từ MoMo IPN callback
+        String rawSignature = "accessKey=" + accessKey
+                + "&amount=" + params.get("amount")
+                + "&extraData=" + params.getOrDefault("extraData", "")
+                + "&message=" + params.get("message")
+                + "&orderId=" + params.get("orderId")
+                + "&orderInfo=" + params.get("orderInfo")
+                + "&orderType=" + params.get("orderType")
+                + "&partnerCode=" + params.get("partnerCode")
+                + "&payType=" + params.get("payType")
+                + "&requestId=" + params.get("requestId")
+                + "&responseTime=" + params.get("responseTime")
+                + "&resultCode=" + params.get("resultCode")
+                + "&transId=" + params.get("transId");
+        String expectedSignature = hmacSHA256(secretKey, rawSignature);
+        return expectedSignature.equals(params.get("signature"));
+    }
+    @Override
+    public String extractTransactionNo(Map<String, String> params) {
+        return params.get("transId");
+    }
+    @Override
+    public boolean isPaymentSuccess(Map<String, String> params) {
+        // MoMo: resultCode = 0 là thành công
+        return "0".equals(params.get("resultCode"));
+    }
+    // ---- Helper ----
+    private String hmacSHA256(String key, String data) {
+        try {
+            Mac mac = Mac.getInstance("HmacSHA256");
+            mac.init(new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "HmacSHA256"));
+            byte[] hash = mac.doFinal(data.getBytes(StandardCharsets.UTF_8));
+            StringBuilder hex = new StringBuilder();
+            for (byte b : hash) hex.append(String.format("%02x", b));
+            return hex.toString();
+        } catch (Exception e) {
+            throw new RuntimeException("Lỗi tạo HMAC-SHA256");
+        }
+    }
+}
+3.6.3. Strategy Pattern (Mẫu Chiến lược)
+Trong Payment Service, Strategy Pattern được áp dụng để quản lý các cổng thanh toán khác nhau (VNPay, MoMo) một cách linh hoạt mà không làm thay đổi logic nghiệp vụ cốt lõi.
+Dưới đây là cấu trúc chi tiết của Strategy Pattern trong clinic_payment:
+// 1. Strategy Interface (Giao diện Chiến lược)
+Định nghĩa một tập hợp các hành vi chung mà tất cả các cổng thanh toán (các chiến lược) bắt buộc phải tuân thủ.
+File nguồn:
+ PaymentGateway.java
+Chi tiết:
+public interface PaymentGateway {
+    // Tạo URL thanh toán chuyển hướng người dùng đến cổng thanh toán tương ứng
+    String createPaymentUrl(Long appointmentId, BigDecimal amount, String orderInfo);
+    // Xác minh chữ ký số (checksum) từ callback/webhook trả về
+    boolean verifyCallback(Map<String, String> params);
+    // Trích xuất mã giao dịch từ phản hồi của cổng thanh toán
+    String extractTransactionNo(Map<String, String> params);
+    // Kiểm tra trạng thái giao dịch trả về có thành công hay không
+    boolean isPaymentSuccess(Map<String, String> params);
+}
+// 2. Concrete Strategies (Các chiến lược cụ thể)
+Đây là các thuật toán/cách tích hợp thực tế với từng cổng thanh toán riêng biệt. Mỗi lớp triển khai cách xử lý chữ ký, mã hóa và định dạng dữ liệu khác nhau theo chuẩn của nhà cung cấp.
+Chiến lược VNPay: 
+VNPayGateway.java
+Thực hiện việc tạo chuỗi truy vấn sắp xếp theo thứ tự bảng chữ cái và mã hóa HMAC-SHA512 để gửi lên VNPay Sandbox.
+Phân tích mã phản hồi kết quả bằng trường vnp_ResponseCode (Thành công khi = "00").
+Chiến lược MoMo
+: MoMoGateway.java
+Gửi yêu cầu HTTP POST bằng JSON và mã hóa HMAC-SHA256 sử dụng các thông số partnerCode, accessKey, requestId, orderId... để gọi cổng thanh toán MoMo.
+Kiểm tra kết quả trả về thông qua trường resultCode (Thành công khi = 0).
+// 3. Context (Bối cảnh sử dụng)
+Lớp chứa tham chiếu đến đối tượng Strategy và thực thi các hành vi nghiệp vụ. Lớp này chỉ tương tác với Strategy thông qua Interface (PaymentGateway), giúp code độc lập hoàn toàn với API cụ thể của VNPay hay MoMo.
+File nguồn:
+ PaymentServiceImpl.java
+Chi tiết:
+@Service
+@RequiredArgsConstructor
+public class PaymentServiceImpl implements PaymentService {
+    private final PaymentFactory paymentFactory; // Trợ giúp lấy đúng Strategy
+    @Override
+    @Transactional
+    public PaymentDto.CreatePaymentResponse createPayment(PaymentDto.CreatePaymentRequest request) {
+        // 1. Nhận đúng Strategy mong muốn từ Factory
+        PaymentGateway gateway = paymentFactory.getGateway(request.getPaymentMethod());
+        // 2. Chạy thuật toán tạo URL của Strategy đó
+        String paymentUrl = gateway.createPaymentUrl(
+                request.getAppointmentId(),
+                request.getAmount(),
+                request.getOrderInfo()
+        );
+        // ... Lưu thông tin giao dịch vào CSDL
+    }
+    @Override
+    @Transactional
+    public void handleCallback(String method, Map<String, String> params) {
+        // 1. Nhận đúng Strategy
+        PaymentGateway gateway = paymentFactory.getGateway(method);
+        // 2. Xác thực và xử lý kết quả thông qua các phương thức của Strategy
+        if (!gateway.verifyCallback(params)) {
+            throw new SecurityException("Chữ ký không hợp lệ");
+        }
+        
+        String transactionNo = gateway.extractTransactionNo(params);
+        boolean success = gateway.isPaymentSuccess(params);
+        
+        // ... Cập nhật trạng thái giao dịch
+    }
+}
+Lợi ích của thiết kế này:
+Nếu sau này hệ thống muốn tích hợp thêm ví điện tử khác (ví dụ: ZaloPay), bạn chỉ cần tạo thêm class ZaloPayGateway implements PaymentGateway và đánh dấu @Component("ZALOPAY"). Lớp dịch vụ PaymentServiceImpl hoàn toàn không cần phải sửa đổi bất kỳ dòng code nào.
+3.6.4. 
+State
+ Pattern
+ 
+Trong Appointment Service, State Pattern được áp dụng để quản lý các trạng thái khác nhau của lịch hẹn (`PENDING_PAYMENT`, `CONFIRMED`, `COMPLETED`, `CANCELLED`). 
+Việc chuyển đổi giữa các trạng thái tuân thủ nghiêm ngặt theo quy tắc nghiệp vụ khám bệnh (ví dụ: lịch hẹn chưa thanh toán thì không được phép chuyển sang trạng thái đã hoàn thành).
+Các thành phần của State Pattern trong `clinic_appointment` bao gồm:
+//1. State Interface (Giao diện trạng thái)
+Định nghĩa các hành động có thể tác động và thay đổi trạng thái của Lịch hẹn.
+  public interface AppointmentState {
+      AppointmentStatus getStatus();
+      void confirm(Appointment appointment);   // Xác nhận lịch (thanh toán thành công)
+      void complete(Appointment appointment);  // Bác sĩ hoàn thành khám
+      void cancel(Appointment appointment);    // Hủy lịch
+  }
+// 2. Concrete States (Các trạng thái cụ thể)
+Mỗi class hiện thực hóa các quy tắc chuyển đổi trạng thái tương ứng:
+PendingState
+public class PendingPaymentState implements AppointmentState {
+    @Override
+    public AppointmentStatus getStatus() {
+        return AppointmentStatus.PENDING_PAYMENT;
+    }
+    @Override
+    public void confirm(Appointment appointment) {
+        appointment.setStatus(AppointmentStatus.CONFIRMED);
+    }
+    @Override
+    public void complete(Appointment appointment) {
+        throw new CustomException("Cannot complete an unpaid appointment");
+    }
+    @Override
+    public void cancel(Appointment appointment) {
+        appointment.setStatus(AppointmentStatus.CANCELLED);
+    }
+}
+Confirm
+ed
+State
+public class ConfirmedState implements AppointmentState {
+    @Override
+    public AppointmentStatus getStatus() {
+        return AppointmentStatus.CONFIRMED;
+    }
+    @Override
+    public void confirm(Appointment appointment) {
+        throw new CustomException("Appointment is already confirmed");
+    }
+    @Override
+    public void complete(Appointment appointment) {
+        appointment.setStatus(AppointmentStatus.COMPLETED);
+    }
+    @Override
+    public void cancel(Appointment appointment) {
+        appointment.setStatus(AppointmentStatus.CANCELLED);
+    }
+}
+Conplete
+d
+State
+public class CompletedState implements AppointmentState {
+    @Override
+    public AppointmentStatus getStatus() {
+        return AppointmentStatus.COMPLETED;
+    }
+    @Override
+    public void confirm(Appointment appointment) {
+        throw new CustomException("Cannot confirm a completed appointment");
+    }
+    @Override
+    public void complete(Appointment appointment) {
+        throw new CustomException("Appointment is already completed");
+    }
+    @Override
+    public void cancel(Appointment appointment) {
+        throw new CustomException("Cannot cancel a completed appointment");
+    }
+}
+Cancel
+led
+State
+public class CancelledState implements AppointmentState {
+    @Override
+    public AppointmentStatus getStatus() {
+        return AppointmentStatus.CANCELLED;
+    }
+    @Override
+    public void confirm(Appointment appointment) {
+        throw new CustomException("Cannot confirm a cancelled appointment");
+    }
+    @Override
+    public void complete(Appointment appointment) {
+        throw new CustomException("Cannot complete a cancelled appointment");
+    }
+    @Override
+    public void cancel(Appointment appointment) {
+        throw new CustomException("Appointment is already cancelled");
+    }
+}
+//
+ 3. State Factory (Khởi tạo trạng thái)
+Một Factory đơn giản giúp tạo ra hoặc lấy ra đối tượng State tương ứng từ Enum `AppointmentStatus`.
+File nguồn:
+ AppointmentStateFactory.java
+Chi tiết:
+  public class AppointmentStateFactory {
+      public static AppointmentState getState(AppointmentStatus status) {
+          if (status == null) {
+              return new PendingPaymentState();
+          }
+          return switch (status) {
+              case PENDING_PAYMENT -> new PendingPaymentState();
+              case CONFIRMED -> new ConfirmedState();
+              case COMPLETED -> new CompletedState();
+              case CANCELLED -> new CancelledState();
+          };
+      }
+  }
+//
+4. Context (Bối cảnh sử dụng / Thực thi)
+Nghiệp vụ thực tế sử dụng các trạng thái này được điều hướng tại AppointmentServiceImpl.java
+Khi có yêu cầu cập nhật trạng thái (ví dụ: xác nhận lịch khám), Service không sử dụng hàng loạt câu lệnh `if-else` phức tạp để kiểm tra điều kiện cũ, mà ủy thác trực tiếp cho đối tượng State xử lý:
+@Override
+@Transactional
+public AppointmentResponse confirmAppointment(Integer id) {
+    Appointment appointment = appointmentRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Appointment not found"));
+    // Lấy đối tượng State hiện tại của Appointment từ Factory
+    AppointmentState state = AppointmentStateFactory.getState(appointment.getStatus());
+    
+    // Gọi hành động confirm (đối tượng State sẽ tự kiểm tra xem hợp lệ không và set status mới)
+    state.confirm(appointment);
+    Appointment saved = appointmentRepository.save(appointment);
+    return appointmentMapper.toResponse(saved);
+}
+Lợi ích:
+Thiết kế này giúp đóng gói logic của từng trạng thái vào các class riêng biệt. Khi bạn muốn thêm một trạng thái mới (ví dụ: `CHECKED_IN` - bệnh nhân đã đến phòng khám chờ), bạn chỉ cần tạo thêm class `CheckedInState` và đăng ký trong `AppointmentStateFactory` mà không sợ làm ảnh hưởng hay phá vỡ logic kiểm tra trạng thái hiện có của hệ thống.
+CHƯƠNG 4: TRIỂN KHAI VÀ ĐÁNH GIÁ KẾT QUẢ
+4.1. Môi trường triển khai hệ thống (Deployment Environment)
+Để đảm bảo hệ thống đặt lịch khám bệnh hoạt động ổn định, an toàn và sẵn sàng phục vụ người dùng thực tế, đồ án đã tiến hành triển khai (deploy) ứng dụng lên môi trường điện toán đám mây (Cloud Computing). Việc triển khai được chia tách thành hai hạ tầng riêng biệt tương ứng với đặc thù của kiến trúc phần mềm: Hạ tầng Frontend (Giao diện) và Hạ tầng Backend (Dịch vụ và Cơ sở dữ liệu).
+4.1.1. Triển khai tầng Giao diện (Frontend)
+Tầng giao diện người dùng và giao diện quản trị nội bộ được xây dựng bằng Next.js (React.js). Để tối ưu hóa tốc độ tải trang toàn cầu và tự động hóa quy trình phân phối, hệ thống được triển khai trên nền tảng 
+Vercel
+ (hoặc nền tảng tương đương hỗ trợ tốt cho Next.js).
+Tích hợp CI/CD:
+ Mã nguồn Frontend được lưu trữ trên kho lưu trữ Git (GitHub/GitLab). Mỗi khi có thay đổi mã nguồn được đẩy (push) lên nhánh main, hệ thống CI/CD (Continuous Integration / Continuous Deployment) sẽ tự động kích hoạt quá trình biên dịch (build) và triển khai (deploy) bản cập nhật mới nhất lên máy chủ trong vài phút mà không gây gián đoạn dịch vụ.
+Tối ưu hóa nội dung (CDN):
+ Nền tảng triển khai hỗ trợ mạng phân phối nội dung (CDN), giúp phân phối các tệp tĩnh (hình ảnh, CSS, JavaScript) đến bệnh nhân một cách nhanh nhất, giảm tải cho máy chủ gốc và tăng cường trải nghiệm người dùng.
+4.1.2. Triển khai tầng Dịch vụ và Dữ liệu (Backend & Database)
+Với kiến trúc Microservices phức tạp gồm nhiều dịch vụ độc lập và cơ sở dữ liệu riêng lẻ, việc triển khai thủ công là bất khả thi và tiềm ẩn nhiều rủi ro. Do đó, toàn bộ tầng Backend và Database được đóng gói (Containerization) và triển khai trên máy chủ ảo (VPS/Cloud Instance) sử dụng công nghệ 
+Docker
+.
+Máy chủ thực thi (Host Environment):
+ * 
+Hệ điều hành:
+ Ubuntu Linux (Phiên bản LTS).
+Cấu hình máy chủ:
+ Yêu cầu tối thiểu RAM 8GB, CPU 4 Cores để có thể gánh được luồng xử lý của nhiều container chạy song song (API Gateway, 6 Microservices và các container MySQL).
+Công nghệ Docker và Docker Compose:
+Đóng gói dịch vụ:
+ Mỗi Microservice (được viết bằng Spring Boot) được biên dịch thành một file .jar và đóng gói vào một 
+Docker Image
+ độc lập, đi kèm với môi 
+trường thực thi Java (JRE) tương ứng. Điều này đảm bảo triệt tiêu hoàn toàn lỗi 
+"mã nguồn chạy được trên máy cá nhân nhưng lỗi trên máy chủ"
+ (It works on my machine).
+Quản lý đa dịch vụ (Orchestration):
+ Hệ thống sử dụng tệp docker-compose.yml để định nghĩa và liên kết toàn bộ mạng lưới các dịch vụ. Chỉ bằng một câu lệnh docker-compose up -d, toàn bộ hệ thống bao gồm 6 Microservices, API Gateway và các cụm Cơ sở dữ liệu MySQL phân tán sẽ được khởi động và cấu hình mạng (Network bridge) tự động, giúp các dịch vụ có thể giao tiếp với nhau một cách bảo mật bên trong máy chủ.
+Cơ sở dữ liệu:
+ Các schema của MySQL (clinic_identity, clinic_profile,...) cũng được chạy dưới dạng các Docker Container, sử dụng cơ chế Volume Mapping để đảm bảo dữ liệu vật lý được lưu trữ an toàn trên ổ cứng của máy chủ, tránh mất mát dữ liệu khi các container bị khởi động lại.
+4.2 Giao diện chương trình
+4.2.1 Phân hệ giao diện xác thực người dùng
+Hệ thống sử dụng ngôn ngữ thiết kế tối giản, tập trung vào trải nghiệm người dùng với sự phân tách rõ ràng giữa khu vực thông tin thương hiệu và khu vực tương tác.
+4.2.1.1 
+Giao diện Đăng nhập (Login):
+Mô tả:
+ Màn hình sử dụng bố cục chia đôi (Split Screen). Bên trái là khu vực truyền tải thông điệp thương hiệu "MediBook" với hình ảnh minh họa sinh động, tạo sự tin tưởng cho người dùng. Bên phải là khu vực tương tác với tông màu tối chủ đạo, giúp làm nổi bật các trường thông tin (Email, Mật khẩu). Nút "Đăng nhập" được thiết kế với màu sắc chủ đạo, tạo điểm nhấn thu hút người dùng thực hiện thao tác chuyển đổi (Conversion).
+4.2.1.2 
+Giao diện Đăng ký (Register):
+Mô tả:
+ Giao diện đồng bộ hoàn toàn với màn hình Đăng nhập về ngôn ngữ thiết kế, giúp người dùng không cảm thấy lạ lẫm khi di chuyển giữa các phân hệ. Hệ thống bổ sung các checkbox xác nhận "Điều khoản và chính sách", đảm bảo tính pháp lý trong quá trình thu thập thông tin người dùng. Các trường nhập liệu được thiết kế rộng rãi, thoáng đãng, kết hợp với các icon trực quan, giúp quá trình nhập liệu trở nên nhanh chóng và ít sai sót nhất có thể.
+Đánh giá chung:
+ Việc áp dụng bộ thư viện TailwindCSS kết hợp với tư duy thiết kế hiện đại đã giúp giao diện đăng nhập/đăng ký đạt được sự cân bằng hoàn hảo giữa tính thẩm mỹ và khả năng sử dụng (usability), nâng cao đáng kể tỷ lệ giữ chân người dùng ngay từ những bước đầu tiên.
+4.2.2 Phân hệ giao diện người dùng
+4.2.2.1 
+Giao diện Trang chủ và Công cụ Tìm kiếm (Homepage & Quick Finder)
+:
+Bố cục (Layout):
+ Trang chủ được thiết kế theo hướng "Landing Page" hiện đại. Điểm nhấn trung tâm là thanh tìm kiếm nhanh (Quick Finder) được đặt nổi bật ngay dưới Banner giới thiệu. Các phân hệ nội dung (Chuyên khoa phổ biến, Bác sĩ nổi bật, Quy trình 4 bước) được chia thành các section rõ ràng, trình bày dưới dạng thẻ (Card view) bo góc mềm mại.
+Khả năng tương tác:
+Quick Finder:
+ Cho phép bệnh nhân tìm kiếm đa luồng (Multi-thread search) ngay tức thì: nhập tên bác sĩ/triệu chứng, chọn khu vực, hoặc chọn ngày khám dự kiến. Khi nhấn "Tìm kiếm", hệ thống sẽ điều hướng trực tiếp đến danh sách đã được lọc.
+Điều hướng tinh gọn:
+ Thay vì nhồi nhét mọi dữ liệu trên một trang, trang chủ chỉ hiển thị các "Preview" (ví dụ: 6 chuyên khoa phổ biến nhất) kèm nút "Xem tất cả", giúp giảm tải thời gian load trang.
+Đánh giá nghiệp vụ (UX/UI):
+ Bố cục sử dụng khoảng trắng (White space) hợp lý cùng tông màu thương hiệu tạo cảm giác y tế chuyên nghiệp nhưng không kém phần thân thiện. Việc đặt thanh tìm kiếm ở vị trí "đập vào mắt" đầu tiên giúp rút ngắn đáng kể hành trình người dùng (User Journey), đặc biệt với những bệnh nhân đang trong tâm lý khẩn trương, cần tìm bác sĩ gấp.
+4.2.2.2 
+Giao diện Danh mục Bác sĩ & Bộ lọc nâng cao (Doctors Directory)
+:
+Mô tả:
+ Khu vực hiển thị toàn bộ danh sách y bác sĩ của hệ thống. Bên trên là hệ thống bộ lọc nâng cao. Mỗi bác sĩ được hiển thị dưới dạng thẻ (Doctor Card) chứa các thông tin trọng yếu: Ảnh đại diện, Học hàm/Học vị, Chuyên khoa, Bệnh viện công tác, Đánh giá (Sao) và Chi phí dịch vụ.
+Khả năng tương tác:
+ 
+Real-time Filtering: Bệnh nhân có thể kết hợp nhiều bộ lọc cùng lúc (Ví dụ: Tìm bác sĩ "Tim mạch" ở "Hà Nội" vào "Ngày mai"). Danh sách sẽ tự động thu hẹp lại tương ứng.
+Call-to-Action: Nút "Đặt lịch ngay" được thiết kế với màu sắc nổi bật, trải rộng toàn bộ phần dưới của thẻ bác sĩ, kích thích thao tác click.
+Đánh giá nghiệp vụ:
+ Giao diện làm tốt vai trò "Showcase" (trưng bày) nguồn lực y tế của phòng khám/bệnh viện. Thiết kế thẻ thông tin tập trung mạnh vào sự tin cậy (hiển thị minh bạch giá cả 
+và nơi công tác), giúp bệnh nhân có đủ dữ kiện để đưa ra quyết định đặt khám mà không cần chuyển trang.
+4.2.2.3 
+Giao diện Quy trình Đặt lịch & Thanh toán (Booking Workflow Modal)
+:
+Đây là phân hệ tương tác cốt lõi nhất của người bệnh, được thiết kế dưới dạng Cửa sổ nổi đa bước (Multi-step Modal) phủ mờ background để giữ sự tập trung tuyệt đối.
+Mô tả các bước thao tác:
+Bước 1 - Chọn ngày giờ:
+ Hệ thống đọc dữ liệu từ Doctor Schedule Service để render danh sách các khung giờ trống theo từng ngày. Các khung giờ đã có người đặt hoặc bác sĩ nghỉ sẽ bị làm xám (Disabled) và thông báo "Đã hết khung giờ trống", ngăn chặn thao tác lỗi.
+Bước 2 - Thông tin bệnh nhân:
+ Form điền thông tin (Họ tên, SĐT, Triệu chứng). Nếu bệnh nhân đã đăng nhập, hệ thống sẽ tự động điền sẵn (Auto-fill) thông tin cá nhân.
+Bước 3 - Thanh toán:
+ Tích hợp đa dạng phương thức (Cổng VNPay, Ví MoMo, Chuyển khoản QR). Bệnh nhân được xem lại tổng hóa đơn minh bạch trước khi thanh toán.
+Bước 4 - Vé điện tử (E-Ticket):
+ Sau khi thành công, hệ thống xuất mã QR Code tiếp đón ngay trên màn hình.
+Điểm nhấn nghiệp vụ:
+ Việc chia nhỏ quy trình đặt lịch thành các bước (Step-by-step) giúp giảm thiểu tải nhận thức (Cognitive load) cho người dùng. Đặc biệt, cơ chế "Khóa lịch tạm thời" (Slot Locking) ngầm định khi bệnh nhân chọn khung giờ giúp giải quyết triệt để bài toán trùng lịch (Concurrency) khi có nhiều người cùng đặt một bác sĩ vào giờ cao điểm.
+4.2.2.4 
+Giao diện Quản lý Lịch hẹn & Bệnh án cá nhân (My Appointments)
+:
+Đây là phân hệ (Portal) định danh, nơi bệnh nhân tự quản lý toàn bộ quá trình chăm sóc sức khỏe của mình.
+Bố cục:
+ Giao diện được chia thành hai khối dữ liệu rõ rệt: "Lịch hẹn sắp tới" (Upcoming) và "Lịch sử khám bệnh" (Past).
+Khả năng tương tác:
+Lịch hẹn sắp tới:
+ Hiển thị các ca chưa khám. Bệnh nhân có thể xem lại "Mã QR tiếp đón" để xuất trình tại quầy, hoặc sử dụng nút "Hủy lịch hẹn" (Cancel) nếu có việc đột xuất. Khi hủy, hệ thống tự động nhả Slot (Unlock) để người khác có thể đặt.
+Lịch sử khám bệnh:
+ Tích hợp nút chức năng "Xem bệnh án" cho các ca đã hoàn thành. Khi nhấn vào, hệ thống sẽ gọi API đến Medical Record Service và hiển thị một Modal chi tiết chứa Kết quả chẩn đoán và Đơn thuốc điện tử do bác sĩ kê.
+Đánh giá nghiệp vụ: 
+Giao diện trao quyền chủ động hoàn toàn cho người bệnh, biến họ thành người quản lý sức khỏe của chính mình thay vì phụ thuộc vào phòng khám. Việc tích hợp mã QR Check-in và Đơn thuốc điện tử tạo ra một vòng lặp trải nghiệm số hóa toàn diện (End-to-End Digital Experience): từ khâu tìm kiếm, đặt lịch, thanh toán, đến đi khám và theo dõi sau khám.
+4.2.3 Phân hệ giao diện bác sĩ
+4.2.3.1 
+Giao diện Quản lý Hồ sơ Bác sĩ (Doctor Profile):
+Bố cục (Layout):
+ Sử dụng thiết kế 2 cột với thanh điều hướng (Sidebar) cố định phía bên trái, giúp bác sĩ dễ dàng chuyển đổi nhanh giữa các phân hệ: Dashboard, Lịch khám, Lịch làm việc, Bệnh nhân và Hồ sơ.
+Khu vực hiển thị thông tin:
+ Header của khu vực nội dung được thiết kế nổi bật với tông màu tím đậm nhận diện thương hiệu, hiển thị đầy đủ thông tin định danh của bác sĩ (Họ tên, Chuyên khoa, Kinh nghiệm).
+Khả năng tương tác:
+Thông tin cá nhân:
+ Các trường dữ liệu (Họ tên, Bằng cấp, Giá khám) được thiết kế dạng Form với hiệu ứng Input sạch sẽ, cho phép bác sĩ thực hiện thao tác "Chỉnh sửa" nhanh chóng qua nút bấm tiện ích.
+Bảo mật:
+ Khu vực thay đổi mật khẩu được tách biệt hoàn toàn về phía bên phải, tạo sự rõ ràng về mặt phân cấp tính năng: Quản lý thông tin và Quản lý bảo mật.
+Đánh giá nghiệp vụ:
+ Dashboard này không chỉ làm tốt chức năng hiển thị mà còn đảm bảo tính logic trong thao tác. Việc gom nhóm thông tin cá nhân và cài đặt bảo mật giúp người dùng giảm thiểu thao tác điều hướng, tối ưu hóa thời gian làm việc cho y bác sĩ trong môi trường lâm sàng bận rộn.
+4.2.3.2 Giao diện lịch khám hôm nay
+Lịch khám hôm nay (Today's Schedule):
+ Khu vực hiển thị bảng danh sách các ca khám theo thời gian thực. Bảng dữ liệu bao gồm các cột thông tin chi tiết: Thời gian, Họ tên bệnh nhân, Số điện thoại và Trạng thái thanh toán/khám. Thiết kế dạng bảng (Data Table) giúp bác sĩ nắm bắt 
+nhanh danh sách bệnh nhân cần tiếp đón, đồng thời các nút hành động (Action Buttons) ngay tại mỗi dòng cho phép thao tác "Bắt đầu khám" hoặc "Hủy lịch" một cách nhanh chóng.
+Đánh giá nghiệp vụ:
+ Dashboard này không chỉ làm tốt chức năng hiển thị mà còn đảm bảo tính logic trong thao tác. Việc gom nhóm thông tin cá nhân, cài đặt bảo mật và bảng danh sách lịch khám giúp người dùng giảm thiểu thao tác điều hướng, tối ưu hóa thời gian làm việc cho y bác sĩ trong môi trường lâm sàng bận rộn.
+4.2.3.3 Giao diện Chi tiết lịch hẹn và Tạo bệnh án (Clinical Workflow)
+Đây là phân hệ lõi, nơi thực hiện nghiệp vụ chính của bác sĩ sau khi tiếp nhận bệnh nhân.
+Giao diện Chi tiết lịch hẹn (Appointment Details):
+Mô tả:
+ Giao diện sử dụng dạng Modal phủ nền mờ, hiển thị đầy đủ thông tin hành chính của bệnh nhân (Họ tên, tuổi, triệu chứng ban đầu) và chi tiết đặt lịch.
+Đánh giá:
+ Cách bố trí dữ liệu theo hàng dọc rõ ràng giúp bác sĩ nắm bắt nhanh trạng thái cuộc hẹn (đã thanh toán hay chưa) trước khi bắt đầu phiên khám.
+Giao diện Tạo bệnh án và Đơn thuốc (Medical Record Entry):
+Mô tả:
+ Khu vực nhập liệu được thiết kế với các Textarea rộng rãi, cho phép bác sĩ ghi chú chẩn đoán lâm sàng và chỉ định đơn thuốc.
+Điểm nhấn nghiệp vụ:
+ Nút "Lưu bệnh án" được đặt ở vị trí dễ nhìn nhất. Khi bác sĩ xác nhận lưu, hệ thống thực hiện hai luồng xử lý song song:
+Lưu trữ dữ liệu:
+ Đẩy dữ liệu vào Medical Record Service (Database).
+Thông báo bất đồng bộ:
+ Hệ thống tự động kích hoạt Notification Service để đẩy thông báo cho bệnh nhân qua Email/SMS về việc "Đã có kết quả khám và đơn thuốc".
+Đánh giá:
+ Việc tích hợp sẵn form nhập liệu bệnh án ngay trong giao diện xem lịch hẹn là một điểm cộng lớn về mặt trải nghiệm (UX). Nó giúp bác sĩ tiết kiệm thời gian chuyển đổi giữa các màn hình, giữ được mạch làm việc liên tục trong môi trường bệnh viện đòi hỏi sự khẩn trương.
+4.2.3.4 
+Giao diện Bệnh nhân và Lịch sử khám (Patient Portal)
+Đây là phân hệ giúp bệnh nhân tự quản lý sức khỏe, xem lại toàn bộ quá trình điều trị và kết quả chẩn đoán từ bác sĩ.
+Giao diện Lịch sử khám bệnh của Bệnh nhân:
+Mô tả:
+ Giao diện này được thiết kế theo dạng danh sách (Timeline hoặc Card view), cho phép bệnh nhân tra cứu toàn bộ các ca khám đã hoàn thành theo thời gian.
+Đánh giá nghiệp vụ:
+ Màn hình này kết nối trực tiếp với Medical Record Service. Việc hiển thị các thông tin như "Ngày khám", "Bác sĩ phụ trách" và "Trạng thái 
+bệnh án" (Đã có kết quả) giúp bệnh nhân theo dõi được quá trình điều trị của mình một cách minh bạch và chủ động.
+Giao diện Chi tiết kết quả khám & Đơn thuốc:
+Mô tả:
+ Khi bệnh nhân nhấn vào một ca khám cụ thể, hệ thống sẽ mở ra chi tiết hồ sơ bệnh án (Medical Record Details).
+Điểm nhấn:
+ Giao diện hiển thị rõ ràng nội dung "Chẩn đoán" của bác sĩ và bảng "Đơn thuốc chi tiết" (Tên thuốc, Liều dùng, Hướng dẫn sử dụng).
+Đánh giá nghiệp vụ:
+ Việc số hóa đơn thuốc giúp bệnh nhân tránh được tình trạng nhầm lẫn khi đọc chữ viết tay của bác sĩ. Đồng thời, đây là bằng chứng điện tử an toàn, giúp bệnh nhân có thể xuất trình hoặc chuyển tiếp thông tin điều trị cho các đơn vị y tế khác khi cần thiết mà không sợ làm mất hồ sơ giấy.
+Đánh giá tổng quan (UX/UI):
+ Phân hệ này đã hoàn thành xuất sắc mục tiêu "Số hóa bệnh án". Với giao diện sạch sẽ, thân thiện, người dùng không cần phải có kiến thức chuyên môn sâu về CNTT vẫn có thể dễ dàng quản lý được lịch sử sức khỏe cá nhân của mình.
+4.3. Đánh giá ưu nhược điểm của hệ thống
+Sau quá trình phân tích, thiết kế và triển khai thực tế, hệ thống BookingClinic đã cơ bản đáp ứng được các yêu cầu nghiệp vụ đặt ra. Tuy nhiên, với việc áp dụng một kiến trúc phân tán phức tạp 
+như Microservices, hệ thống vẫn tồn tại những ưu điểm và hạn chế nhất định cần được đánh giá khách quan.
+4.3.1. Ưu điểm nổi bật
+Khả năng chịu tải và tính sẵn sàng cao (High Availability):
+ Nhờ việc chia nhỏ thành 6 Microservices độc lập kết hợp cơ chế cân bằng tải qua API Gateway, hệ thống có khả năng đáp ứng lượng truy cập lớn trong cùng một thời điểm. Việc áp dụng tính cô lập (Fault Isolation) giúp hệ thống không bị "sập toàn mạch" (Single Point of Failure). Nếu Payment Service gặp sự cố, bệnh nhân vẫn có thể tra cứu thông tin bác sĩ qua Profile Service một cách bình thường.
+Tách bạch nghiệp vụ (Loose Coupling):
+ Các dịch vụ giao tiếp với nhau qua RESTful API thay vì truy vấn chéo cơ sở dữ liệu. Điều này giúp các nhóm phát triển có thể làm việc song song, sử dụng các công nghệ khác nhau (nếu cần) và dễ dàng bảo trì hoặc nâng cấp một module mà không làm ảnh hưởng đến toàn bộ hệ thống.
+Trải nghiệm người dùng được tối ưu:
+ Việc áp dụng Next.js (Server-Side Rendering) cho phần giao diện giúp tăng tốc độ tải trang, nâng cao khả năng tối ưu hóa công cụ tìm kiếm (SEO) và mang lại sự mượt mà trên đa nền tảng thiết bị.
+4.3.2. Những hạn chế và khó khăn còn tồn tại
+Độ phức tạp trong việc triển khai và vận hành (Deployment Complexity):
+ Thay vì chỉ quản lý một khối mã nguồn duy nhất (Monolithic), việc vận hành kiến trúc Microservices đòi hỏi phải quản lý hàng loạt các Docker Container cho cả ứng dụng lẫn cơ sở dữ liệu. Điều này đòi hỏi chi phí hạ tầng (máy chủ, RAM, bộ nhớ) cao hơn đáng kể và cấu hình mạng (Networking) phức tạp hơn.
+Khó khăn trong việc truy vết lỗi (Hard to Trace Bugs):
+ Khi một luồng nghiệp vụ (ví dụ: Đặt lịch khám) bị lỗi, yêu cầu (request) có thể đã đi qua API Gateway, chui vào Appointment Service, rồi tạch ở Payment Service. Việc tìm ra nguyên nhân chính xác mất rất nhiều thời gian nếu không có các công cụ ghi log tập trung chuyên dụng.
+Quản lý giao dịch phân tán (Distributed Transactions):
+ Đảm bảo tính toàn vẹn dữ liệu (Data Consistency) trên nhiều Database khác nhau là một thách thức lớn. Việc áp dụng các cơ chế "Liên kết mềm" tuy giảm được sự phụ thuộc nhưng đôi khi gây khó khăn cho các báo cáo thống kê cần "Join" nhiều bảng dữ liệu.
+CHƯƠNG 5: KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN
+5.1. Kết luận
+Sau quá trình thực hiện đồ án, hệ thống BookingClinic đã được hoàn thành với các kết quả cụ thể như sau:
+Xây dựng thành công kiến trúc Microservices:
+ Hệ thống đã được phân tách thành 6 dịch vụ độc lập (Identity, Profile, Appointment, Medical Record, Payment, Notification), đảm bảo tính tách biệt, dễ bảo trì và mở rộng.
+Triển khai ứng dụng thực tế:
+ Hệ thống đã được đóng gói bằng Docker và triển khai trên môi trường Cloud, cho thấy tính khả thi khi vận hành thực tế.
+Hoàn thiện quy trình nghiệp vụ:
+ Hệ thống đã số hóa thành công luồng nghiệp vụ khép kín từ Đăng ký tài khoản -> Tìm kiếm bác sĩ -> Đặt lịch khám -> Thanh toán -> Thăm khám và Lưu bệnh án điện tử.
+Trải nghiệm người dùng:
+ Giao diện Next.js được xây dựng theo chuẩn hiện đại, Responsive đa nền tảng, đảm bảo sự thân thiện và dễ sử dụng cho cả đối tượng bệnh nhân và đội ngũ y bác sĩ.
+Nhìn chung, đồ án đã giải quyết được vấn đề đặt ra ban đầu về việc tối ưu hóa quy trình đặt lịch và số hóa bệnh án tại các cơ sở y tế, đồng thời là minh chứng cho việc áp dụng thành thạo các mẫu thiết kế (Design Patterns) và công nghệ hiện đại vào phát triển phần mềm.
+5.2. Hướng phát triển trong tương lai
+Dù đã đạt được những kết quả khả quan, hệ thống vẫn cần những cải tiến để trở thành một nền tảng y tế toàn diện:
+Tích hợp trí tuệ nhân tạo (AI):
+ Phát triển module hỗ trợ chẩn đoán sơ bộ dựa trên triệu chứng bệnh nhân nhập vào, giúp bác sĩ tiết kiệm thời gian phân loại bệnh án.
+Khám chữa bệnh từ xa (Telemedicine):
+ Tích hợp tính năng Video Call trực tiếp trên nền tảng (sử dụng WebRTC) để bác sĩ có thể tư vấn từ xa cho những ca bệnh nhẹ.
+Phân tích dữ liệu lớn (Big Data Analytics):
+ Xây dựng các biểu đồ thống kê chuyên sâu về xu hướng dịch bệnh, lưu lượng bệnh nhân theo thời gian để hỗ trợ quản trị bệnh viện đưa ra các chiến lược điều phối nhân lực hiệu quả.
+Kết nối thiết bị y tế (IoT):
+ Tích hợp dữ liệu từ các thiết bị đo sức khỏe cá nhân (Smartwatch, máy đo huyết áp thông minh) vào hồ sơ bệnh án để bác sĩ có dữ liệu theo dõi bệnh nhân liên tục.
+Hệ thống BookingClinic không chỉ dừng lại ở một đồ án tốt nghiệp, mà còn là một nền tảng tiềm năng để phát triển thành một hệ sinh thái chăm sóc sức khỏe số thực thụ trong tương lai.
+Phân công công việc
+Họ và Tên
+Mã sinh viên
+Nhiệm vụ
+Hồ Minh Khoa
+N22DCCN140
+Viết các service ở backend: clinic_payment, clinic_notification, clinic_medical_record
+Viết giao diện frontend patient
+Nguyễn Ngọc Đức
+N22DCCN121
+Viết các service ở backend: clinic_identity, clinic_profile, clinic_appointment, api_gateway.
+Viết giao diện frontend doctor

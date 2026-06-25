@@ -62,6 +62,11 @@ export const createVnpayUrl = async (req, res) => {
     const { bookingId } = req.body;
     const userId = req.headers['x-user-id'];
     const ipAddr = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '127.0.0.1';
+    
+    // Lấy host gốc (do API Gateway forward xuống)
+    const host = req.headers['x-forwarded-host'] || req.headers.host;
+    const { isMobile } = req.body;
+    const dynamicReturnUrl = `http://${host}/api/payments/vnpay-return${isMobile ? '?app=android' : ''}`;
 
     const booking = await Booking.findByPk(bookingId, {
       include: [{ model: Ticket, as: 'Tickets' }]
@@ -77,6 +82,7 @@ export const createVnpayUrl = async (req, res) => {
       amount: booking.total_amount,
       orderInfo: `Thanh toan don dat ve ${bookingId}`,
       ipAddr,
+      returnUrl: dynamicReturnUrl
     });
 
     // Lưu transaction_no để tra cứu sau, và email nếu client gửi kèm
@@ -110,8 +116,13 @@ export const vnpayReturn = async (req, res) => {
 
     if (!booking) return res.status(404).json({ message: 'Không tìm thấy đơn đặt vé.' });
 
-    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
-
+    const isMobile = req.query.app === 'android';
+    let frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+    
+    // Nếu thanh toán từ App Android, redirect về Deep Link của app
+    if (isMobile) {
+      frontendUrl = 'greenbus:/'; // Khi nối với '/payment-result' sẽ thành greenbus://payment-result
+    }
     if (result.success && booking.status === 'pending') {
       booking.status = 'paid';
       await booking.save();

@@ -46,29 +46,94 @@ services:
     networks:
       - microservice-net
 
-  # ═══════════════════════════════════════
-  # MOCK SERVICES (bạn kia làm sau)
-  # ═══════════════════════════════════════
-
-  mock-catalog-service:
-    build: ./mock-catalog-service
-    container_name: mock-catalog-service
+  mysql-catalog:
+    image: mysql:8.0
+    container_name: mysql-catalog
     restart: unless-stopped
     environment:
-      PORT: 3002
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: catalog_service_db
     ports:
-      - "3002:3002"
+      - "3309:3306"
+    volumes:
+      - mysql_catalog_data:/var/lib/mysql
+      - ./init-db/catalog_service.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - microservice-net
 
-  mock-trip-service:
-    build: ./mock-trip-service
-    container_name: mock-trip-service
+  mysql-trip:
+    image: mysql:8.0
+    container_name: mysql-trip
     restart: unless-stopped
     environment:
+      TZ: Asia/Ho_Chi_Minh
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: trip_service_db
+    ports:
+      - "3310:3306"
+    volumes:
+      - mysql_trip_data:/var/lib/mysql
+      - ./init-db/trip_service.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - microservice-net
+
+  # ═══════════════════════════════════════
+  # CATALOG SERVICE
+  # ═══════════════════════════════════════
+
+  catalog-service:
+    build: ./catalog-service
+    container_name: catalog-service
+    restart: unless-stopped
+    environment:
+      PORT: 3002
+      DB_HOST: mysql-catalog
+      DB_PORT: 3306
+      DB_NAME: catalog_service_db
+      DB_USER: root
+      DB_PASS: rootpassword
+      ALLOWED_ORIGIN: http://localhost:5173
+    ports:
+      - "3002:3002"
+    depends_on:
+      mysql-catalog:
+        condition: service_healthy
+    networks:
+      - microservice-net
+
+  # ═══════════════════════════════════════
+  # TRIP SERVICE
+  # ═══════════════════════════════════════
+
+  trip-service:
+    build: ./trip-service
+    container_name: trip-service
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Ho_Chi_Minh
       PORT: 3003
+      DB_HOST: mysql-trip
+      DB_PORT: 3306
+      DB_NAME: trip_service_db
+      DB_USER: root
+      DB_PASS: rootpassword
+      ALLOWED_ORIGIN: http://localhost:5173
+      API_GATEWAY_URL: http://api-gateway:3000
     ports:
       - "3003:3003"
+    depends_on:
+      mysql-trip:
+        condition: service_healthy
     networks:
       - microservice-net
 
@@ -130,8 +195,8 @@ services:
       DB_NAME: order_service_db
       DB_USER: root
       DB_PASS: rootpassword
-      TRIP_SERVICE_URL: http://mock-trip-service:3003
-      CATALOG_SERVICE_URL: http://mock-catalog-service:3002
+      TRIP_SERVICE_URL: http://trip-service:3003
+      CATALOG_SERVICE_URL: http://catalog-service:3002
       NOTIFICATION_SERVICE_URL: http://notification-service:3005
       ALLOWED_ORIGIN: http://localhost:5173
       FRONTEND_URL: http://localhost:5173
@@ -144,9 +209,9 @@ services:
     depends_on:
       mysql-order:
         condition: service_healthy
-      mock-trip-service:
+      trip-service:
         condition: service_started
-      mock-catalog-service:
+      catalog-service:
         condition: service_started
       notification-service:
         condition: service_started
@@ -166,22 +231,24 @@ services:
       ACCESS_TOKEN_SECRET: my_super_secret_jwt_key_2024
       USER_SERVICE_URL: http://user-service:3001
       ORDER_SERVICE_URL: http://order-service:3004
-      CATALOG_SERVICE_URL: http://mock-catalog-service:3002
-      TRIP_SERVICE_URL: http://mock-trip-service:3003
+      CATALOG_SERVICE_URL: http://catalog-service:3002
+      TRIP_SERVICE_URL: http://trip-service:3003
       FRONTEND_URL: http://localhost:5173
     ports:
       - "3000:3000"
     depends_on:
       - user-service
       - order-service
-      - mock-catalog-service
-      - mock-trip-service
+      - catalog-service
+      - trip-service
     networks:
       - microservice-net
 
 volumes:
   mysql_user_data:
   mysql_order_data:
+  mysql_catalog_data:
+  mysql_trip_data:
 
 networks:
   microservice-net:

@@ -109,9 +109,15 @@ export default function BookingPage() {
 
   // 🔥 3. ĂNG-TEN THU SÓNG SOCKET (Lắng nghe sự thay đổi ghế từ thằng khác)
   useEffect(() => {
-    socket.on('SEAT_UPDATED', (data) => {
+    if (!tripId) return;
+
+    // Vào phòng (room) của chuyến xe này để Backend biết đường gửi update
+    socket.emit('join-trip', tripId);
+
+    // Bắt đúng tên event 'seat-updated' (chữ thường, có gạch nối) từ API Gateway
+    socket.on('seat-updated', (data) => {
       // Bắt buộc check đúng chuyến xe tao đang xem thì tao mới cập nhật
-      if (data.tripId === parseInt(tripId)) {
+      if (String(data.tripId) === String(tripId)) {
         setSeatsFromApi((prevSeats) => 
           prevSeats.map(seat => 
             (seat.seatNumber || seat.seat_number) === data.seatNumber 
@@ -124,7 +130,8 @@ export default function BookingPage() {
 
     // Cleanup khi user thoát trang
     return () => {
-      socket.off('SEAT_UPDATED');
+      socket.emit('leave-trip', tripId);
+      socket.off('seat-updated');
     };
   }, [tripId]);
 
@@ -163,7 +170,7 @@ export default function BookingPage() {
         // 🚀 Kêu lên Backend: Tao lấy ghế này nha!
         socket.emit('HOLD_SEAT', { tripId: parseInt(tripId), seatNumber: id });
         
-        await holdSeat({ tripId, seatNumbers: [id] });
+        await holdSeat({ tripId, seatIds: [seat?.id] });
       } else {
         // Nhả ghế lập tức
         setSelectedSeats(prev => prev.filter(s => s !== id));
@@ -172,7 +179,7 @@ export default function BookingPage() {
         // 🚀 Kêu lên Backend: Tao nhả ghế này!
         socket.emit('RELEASE_SEAT', { tripId: parseInt(tripId), seatNumber: id });
 
-        await releaseSeat({ tripId, seatNumbers: [id] });
+        await releaseSeat({ tripId, seatIds: [seat?.id] });
       }
     } catch (error) {
       console.error("Biến căng lúc chọn ghế:", error);
@@ -201,6 +208,7 @@ export default function BookingPage() {
           tripSeatId: seatInfo.id,
           passengerName: formData.name,
           passengerPhone: formData.phone,
+          passengerEmail: formData.email,
           pickupStopId: typeof selectedPickup === 'object' ? selectedPickup?.id : selectedPickup,
           dropoffStopId: typeof selectedDropoff === 'object' ? selectedDropoff?.id : selectedDropoff
         };
@@ -210,6 +218,8 @@ export default function BookingPage() {
         userId: user?.id, 
         tripId: parseInt(tripId),
         totalAmount: currentTotalPrice,
+        email: formData.email,
+        fullName: formData.name,
         tickets: ticketsPayload
       };
 

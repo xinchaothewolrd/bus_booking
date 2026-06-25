@@ -33,8 +33,65 @@ export const getTicketByQr = async (req, res) => {
       include: [{ model: Booking, as: 'Booking' }]
     });
     if (!ticket) return res.status(404).json({ message: 'Vé không tồn tại hoặc mã QR không hợp lệ.' });
-    return res.status(200).json(ticket);
+
+    let ticketJSON = ticket.toJSON();
+    
+    // 1. Android expects 'booking' instead of 'Booking'
+    ticketJSON.booking = ticketJSON.Booking;
+    delete ticketJSON.Booking;
+
+    // 2. Fetch Trip and Route
+    const tripId = ticketJSON.booking?.trip_id || ticketJSON.booking?.tripId;
+    if (tripId) {
+      try {
+        const tripRes = await tripService.getTrip(tripId);
+        const trip = tripRes.data || tripRes;
+        if (trip && (trip.route_id || trip.routeId)) {
+          const routeRes = await catalogService.getRoute(trip.route_id || trip.routeId);
+          const route = routeRes.data || routeRes;
+          ticketJSON.booking.route = {
+            departureLocation: route.departure_location || route.departureLocation,
+            arrivalLocation: route.arrival_location || route.arrivalLocation
+          };
+        }
+        
+        // Fetch Seat Number
+        const seatId = ticketJSON.trip_seat_id || ticketJSON.tripSeatId;
+        if (seatId) {
+          const seatsRes = await tripService.getSeats(tripId);
+          const seats = Array.isArray(seatsRes.data) ? seatsRes.data : seatsRes;
+          const seat = seats.find(s => s.id === seatId);
+          if (seat) {
+            ticketJSON.seatNumber = seat.seat_number || seat.seatNumber;
+          }
+        }
+      } catch (e) {
+        console.error('Lỗi lấy thông tin route/seat:', e.message);
+      }
+    }
+
+    // 3. Fetch Stops
+    const pickupId = ticketJSON.pickup_stop_id || ticketJSON.pickupStopId;
+    if (pickupId) {
+      try {
+        const stopRes = await catalogService.getRouteStop(pickupId);
+        const st = stopRes.data || stopRes;
+        ticketJSON.pickupStop = { ...st, name: st.stopName || st.stop_name };
+      } catch (e) {}
+    }
+
+    const dropoffId = ticketJSON.dropoff_stop_id || ticketJSON.dropoffStopId;
+    if (dropoffId) {
+      try {
+        const stopRes = await catalogService.getRouteStop(dropoffId);
+        const st = stopRes.data || stopRes;
+        ticketJSON.dropoffStop = { ...st, name: st.stopName || st.stop_name };
+      } catch (e) {}
+    }
+
+    return res.status(200).json({ ticket: ticketJSON });
   } catch (err) {
+    console.error(err);
     return res.status(500).json({ message: 'Lỗi kiểm tra vé.' });
   }
 };
@@ -59,8 +116,8 @@ export const useTicket = async (req, res) => {
 export const getAllTickets = async (req, res) => {
   try {
     const userRole = req.headers['x-user-role'];
-    if (userRole !== 'admin') {
-      return res.status(403).json({ message: 'Yêu cầu quyền Admin.' });
+    if (userRole !== 'admin' && userRole !== 'staff') {
+      return res.status(403).json({ message: 'Yêu cầu quyền Admin hoặc Staff.' });
     }
 
     const { bookingId, status } = req.query;
@@ -76,6 +133,56 @@ export const getAllTickets = async (req, res) => {
     return res.status(200).json(tickets);
   } catch (err) {
     return res.status(500).json({ message: 'Lỗi lấy danh sách vé.' });
+  }
+};
+
+// ── Lấy vé theo chuyến (Dành cho App nhân viên quét vé) ───────────
+export const getTicketsByTrip = async (req, res) => {
+  try {
+    const { tripId } = req.params;
+    
+    // Lấy tất cả bookings thuộc chuyến xe này
+    const bookings = await Booking.findAll({
+      where: { trip_id: tripId },
+      attributes: ['id']
+    });
+
+    const bookingIds = bookings.map(b => b.id);
+    if (bookingIds.length === 0) {
+      return res.status(200).json([]);
+    }
+
+    // Lấy tất cả vé thuộc các bookings này
+    const tickets = await Ticket.findAll({
+      where: { booking_id: bookingIds },
+      order: [['created_at', 'ASC']]
+    });
+
+    // Lấy thông tin ghế từ trip-service
+    let tripSeats = [];
+    try {
+      const seatsRes = await tripService.getSeats(tripId);
+      tripSeats = Array.isArray(seatsRes.data) ? seatsRes.data : seatsRes;
+    } catch (e) {
+      console.error('Lỗi lấy ghế từ trip-service:', e.message);
+    }
+
+    const enrichedTickets = tickets.map(ticket => {
+      const ticketJSON = ticket.toJSON();
+      const seatId = ticketJSON.trip_seat_id || ticketJSON.tripSeatId;
+      const seat = tripSeats.find(s => s.id === seatId);
+      
+      ticketJSON.Seat = {
+        seatNumber: seat ? (seat.seatNumber || seat.seat_number) : null
+      };
+
+      return ticketJSON;
+    });
+
+    return res.status(200).json(enrichedTickets);
+  } catch (err) {
+    console.error('Lỗi lấy vé theo trip:', err);
+    return res.status(500).json({ message: 'Lỗi lấy danh sách vé theo chuyến.' });
   }
 };
 
@@ -186,7 +293,7 @@ export const getTicketsByUser = async (req, res) => {
         model: Booking,
         as: 'Booking',
         where: { user_id: paramUserId },
-        attributes: ['id', 'user_id', 'trip_id', 'status']
+        attributes: ['id', 'user_id', 'trip_id', 'status', 'total_amount', 'booking_time']
       }],
       order: [['created_at', 'DESC']],
     });
@@ -203,7 +310,19 @@ export const getTicketsByUser = async (req, res) => {
       // 1. Enrich Trip
       if (!tripCache[tripId]) {
         try {
-          tripCache[tripId] = await tripService.getTrip(tripId);
+          const tripData = await tripService.getTrip(tripId);
+          // Gắn thêm thông tin route
+          const routeId = tripData.routeId || tripData.route_id;
+          if (routeId) {
+            try {
+              const routeData = await catalogService.getRoute(routeId);
+              tripData.route = routeData;
+            } catch (err) {}
+          }
+          if (!tripData.route) {
+            tripData.route = { departureLocation: 'N/A', arrivalLocation: 'N/A' };
+          }
+          tripCache[tripId] = tripData;
         } catch {
           tripCache[tripId] = { route: { departureLocation: 'N/A', arrivalLocation: 'N/A' } };
         }
@@ -211,7 +330,8 @@ export const getTicketsByUser = async (req, res) => {
       ticketJSON.Booking.Trip = tripCache[tripId];
 
       // 2. Enrich Seat
-      if (ticketJSON.tripSeatId) {
+      if (ticketJSON.tripSeatId || ticketJSON.trip_seat_id) {
+        const seatId = ticketJSON.tripSeatId || ticketJSON.trip_seat_id;
         if (!tripCache[`seats_${tripId}`]) {
           try {
             tripCache[`seats_${tripId}`] = await tripService.getSeats(tripId);
@@ -219,8 +339,8 @@ export const getTicketsByUser = async (req, res) => {
             tripCache[`seats_${tripId}`] = [];
           }
         }
-        const seat = tripCache[`seats_${tripId}`].find(s => s.id === ticketJSON.tripSeatId);
-        if (seat) ticketJSON.Seat = { seatNumber: seat.seat_number };
+        const seat = tripCache[`seats_${tripId}`].find(s => s.id === seatId);
+        if (seat) ticketJSON.Seat = { seatNumber: seat.seatNumber || seat.seat_number };
       }
 
       // 3. Enrich PickupStop
