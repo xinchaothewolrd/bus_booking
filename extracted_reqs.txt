@@ -1,0 +1,51 @@
+BÁO CÁO THIẾT KẾ KIẾN TRÚC MICROSERVICES
+HỆ THỐNG ĐẶT VÉ XE KHÁCH TRỰC TUYẾN
+1. TỔNG QUAN KIẾN TRÚC HỆ THỐNG
+Hệ thống được thiết kế theo kiến trúc Microservices kết hợp mẫu thiết kế API Gateway (API Gateway Pattern). Toàn bộ hệ thống được phân rã thành các dịch vụ độc lập (services), mỗi dịch vụ đảm nhiệm một ranh giới nghiệp vụ (Bounded Context) cụ thể và quản lý một cơ sở dữ liệu riêng biệt theo nguyên tắc 
+Database per Service
+.
+Kiến trúc này giúp hệ thống dễ dàng mở rộng, cô lập lỗi (nếu một dịch vụ chết, các dịch vụ khác vẫn hoạt động) và tối ưu hóa việc phát triển độc lập. Hệ thống Backend được xây dựng trên nền tảng ExpressJS.
+2. PHÂN RÃ DỊCH VỤ VÀ CƠ SỞ DỮ LIỆU (SERVICE DECOMPOSITION)
+Hệ thống bao gồm 1 API Gateway và 5 Microservices cốt lõi:
+2.1. API Gateway (Cổng giao tiếp API)
+Nhiệm vụ: Đóng vai trò là điểm vào duy nhất (Single Entry Point) cho mọi request từ Frontend (Next.js).
+Chức năng cốt lõi:
+Routing: Phân luồng request đến đúng Microservice phía sau (Reverse Proxy sử dụng http-proxy-middleware).
+Authentication (Soát vé): Kiểm tra và xác thực tính hợp lệ (Verify) của JWT Token trước khi cho phép request đi sâu vào hệ thống. API Gateway hoàn toàn không có quyền tạo ra token mới.
+Database: Không có.
+2.2. User Service (Dịch vụ Người dùng / Auth Server)
+Nhiệm vụ: Quản lý thông tin tài khoản và xác thực người dùng. Chịu trách nhiệm trực tiếp trong việc cấp phát (Generate) Access Token và quản lý vòng đời của Refresh Token.
+Database (Bảng quản lý):
+users 
+sessions
+ 
+- 
+Bảng này dùng để lưu trữ và quản lý trạng thái của Refresh Token, phục vụ cho luồng cấp lại Token hoặc Logout.
+2.3. Catalog Service (Dịch vụ Danh mục & Bảng giá)
+Nhiệm vụ: Quản lý dữ liệu tĩnh và ít biến động về tuyến đường, loại xe và các quy tắc tính giá (Dynamic Pricing). Cung cấp dữ liệu để người dùng tìm kiếm chuyến đi.
+Database (Bảng quản lý):
+routes (Thông tin tuyến đường)
+bus_types (Loại xe, cấu trúc ghế ngồi)
+route_stops (Điểm dừng của tuyến)
+buses (Thông tin xe cụ thể)
+route_fares (Giá vé gốc)
+price_rules (Quy tắc phụ thu lễ/tết)
+2.4. Trip Service (Dịch vụ Chuyến đi & Quản lý Kho ghế)
+Nhiệm vụ: Quản lý lịch trình các chuyến xe cụ thể và trạng thái ghế ngồi theo thời gian thực (Real-time Concurrency). Xử lý nghiệp vụ "Khóa ghế tạm thời" (Pending) khi khách hàng đang thao tác đặt vé.
+Database (Bảng quản lý):
+trips (Lịch trình chuyến đi cụ thể)
+trip_seats (Trạng thái từng ghế: available, pending, booked, kèm thời gian hết hạn pending_until)
+2.5. Order Service (Dịch vụ Đơn hàng & Thanh toán)
+Nhiệm vụ: Là dịch vụ cốt lõi xử lý quy trình đặt vé, tích hợp cổng thanh toán (VNPAY) và xuất vé điện tử (E-ticket). Việc gộp Order và Payment vào chung một Bounded Context giúp đảm bảo tính toàn vẹn dữ liệu (Data Integrity) và tránh các lỗi của giao dịch phân tán (Distributed Transaction).
+Database (Bảng quản lý):
+bookings (Đơn đặt vé tổng)
+payments (Lịch sử giao dịch, mã tham chiếu VNPAY)
+tickets (Vé điện tử chi tiết, mã QR code)
+2.6. Notification Service (Dịch vụ Thông báo / Tiện ích)
+Nhiệm vụ: Xử lý các tác vụ bất đồng bộ liên quan đến gửi thông báo (Email, SMS) để không làm tắc nghẽn luồng xử lý chính của hệ thống.
+Database (Bảng quản lý):
+ dùng nodemailer
+3. SƠ ĐỒ QUAN HỆ VÀ GIAO TIẾP GIỮA CÁC SERVICES
+Nguyên tắc giao tiếp:
+Giao tiếp External (Đường nét liền): Client chỉ gọi duy nhất vào API Gateway. Gateway thực hiện xác thực Token và định tuyến (Routing) đến các Microservice tương ứng.
+Giao tiếp Internal (Đường nét đứt): Các Service giao tiếp nội bộ với nhau thông qua HTTP REST Request (sử dụng Axios hoặc Fetch trong môi trường Node.js).

@@ -15,6 +15,7 @@ const sequelize = new Sequelize(
     port: DB_PORT,
     dialect: 'mysql',
     logging: false,
+    timezone: '+07:00',
   }
 );
 

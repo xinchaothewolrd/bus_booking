@@ -71,6 +71,7 @@ services:
     container_name: mysql-trip
     restart: unless-stopped
     environment:
+      TZ: Asia/Ho_Chi_Minh
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: trip_service_db
     ports:
@@ -119,6 +120,7 @@ services:
     container_name: trip-service
     restart: unless-stopped
     environment:
+      TZ: Asia/Ho_Chi_Minh
       PORT: 3003
       DB_HOST: mysql-trip
       DB_PORT: 3306
