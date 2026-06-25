@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDB } from './libs/db.js';
+import './models/index.js';
 import bookingRoute from './routes/bookingRoute.js';
 import paymentRoute from './routes/paymentRoute.js';
 import ticketRoute from './routes/ticketRoute.js';

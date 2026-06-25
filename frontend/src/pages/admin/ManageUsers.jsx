@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
 // ─── API Config ───────────────────────────────────────────────────────────────
-const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:8080/api";
+const API_BASE = import.meta.env.VITE_API_URL ?? "http://localhost:3000/api";
 const api = axios.create({ baseURL: API_BASE });
 api.interceptors.request.use((cfg) => {
   const token = localStorage.getItem("token");
@@ -125,12 +125,20 @@ function UserModal({ user, onClose, onSave }) {
     if (Object.keys(e).length) { setErrors(e); return; }
     setSaving(true);
     try {
+      // Map fullName sang full_name cho backend hiểu
+      const payload = { ...form, full_name: form.fullName };
+
       if (isEdit) {
-        const { data } = await api.put(`/users/${form.id}`, form);
-        onSave(data);
+        const { data } = await api.put(`/users/${form.id}`, payload);
+        // Frontend map lại data.data.full_name thành data.data.fullName
+        const savedUser = data.data || data;
+        savedUser.fullName = savedUser.full_name || savedUser.fullName;
+        onSave(savedUser);
       } else {
-        const { data } = await api.post("/users", form);
-        onSave(data);
+        const { data } = await api.post("/users", payload);
+        const savedUser = data.data || data;
+        savedUser.fullName = savedUser.full_name || savedUser.fullName;
+        onSave(savedUser);
       }
     } catch (err) {
       console.warn("Lưu API thất bại. Đang xử lý giả lập tại Frontend.");
@@ -183,10 +191,10 @@ function UserModal({ user, onClose, onSave }) {
         {/* Body */}
         <div className="px-6 py-5 space-y-4">
           {errors._global && <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-2.5 text-sm text-red-600">{errors._global}</div>}
-          <Field fkey="fullName"     label="Họ và tên"       placeholder="Nguyễn Văn A" />
-          <Field fkey="email"    label="Email"            type="email" placeholder="example@email.com" />
-          <Field fkey="phone"    label="Số điện thoại"   placeholder="0901234567" />
-          {!isEdit && <Field fkey="password" label="Mật khẩu" type="password" placeholder="Tối thiểu 6 ký tự" />}
+          {Field({ fkey: "fullName", label: "Họ và tên", placeholder: "Nguyễn Văn A" })}
+          {Field({ fkey: "email", label: "Email", type: "email", placeholder: "example@email.com" })}
+          {Field({ fkey: "phone", label: "Số điện thoại", placeholder: "0901234567" })}
+          {!isEdit && Field({ fkey: "password", label: "Mật khẩu", type: "password", placeholder: "Tối thiểu 6 ký tự" })}
           <div>
             <label className="block text-xs font-semibold text-slate-500 mb-1">Vai trò</label>
             <select

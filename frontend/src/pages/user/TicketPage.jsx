@@ -49,18 +49,18 @@ export default function TicketPage() {
             // Map dữ liệu từ Backend sang chuẩn UI của mày
             groups[bId] = {
               id: bId, // Dùng bookingId làm ID chính cho Card
-              code: item.qrCode,
+              code: item.qrCode || item.qr_code,
               status:
                 item.Booking?.status === "paid"
                   ? "upcoming"
                   : item.Booking?.status,
               statusTicket: item?.status,
-              from: item.Booking.Trip.route.departureLocation,
-              to: item.Booking.Trip.route.arrivalLocation,
+              from: item.Booking?.Trip?.route?.departureLocation || "N/A",
+              to: item.Booking?.Trip?.route?.arrivalLocation || "N/A",
               departureTime:
-                item.Booking?.Trip?.departureTime || "2024-12-31T08:00:00Z", // API chưa có giờ chạy chính xác của Trip, tao để tạm
+                item.Booking?.Trip?.departureTime || item.Booking?.Trip?.departure_time || "2024-12-31T08:00:00Z", // API chưa có giờ chạy chính xác của Trip, tao để tạm
               arrivalTime:
-                item.Booking?.Trip?.arrivalTime || "2024-12-31T12:00:00Z", // API chưa có giờ chạy chính xác của Trip, tao để tạm
+                item.Booking?.Trip?.arrivalTime || item.Booking?.Trip?.arrival_time || "2024-12-31T12:00:00Z", // API chưa có giờ chạy chính xác của Trip, tao để tạm
               timeRange: "Dự kiến", // API chưa có giờ chạy chính xác của Trip
               date: formattedDate,
               seats: [], // Mảng chứa các ghế
@@ -72,14 +72,14 @@ export default function TicketPage() {
                 : "Chưa đăng ký điểm trả",
               // Lưu lại danh sách vé gốc để hiển thị QR riêng nếu cần
               rawTickets: [],
-              passengerName: item.passengerName,
-              totalAmount: item.Booking?.totalAmount,
-              created_at: item.created_at,
+              passengerName: item.passengerName || item.passenger_name,
+              totalAmount: item.Booking?.totalAmount || item.Booking?.total_amount,
+              created_at: item.createdAt || item.created_at,
             };
           }
           // Đẩy ghế và vé gốc vào nhóm
-          if (item.Seat?.seatNumber) {
-            groups[bId].seats.push(item.Seat.seatNumber);
+          if (item.Seat?.seatNumber || item.Seat?.seat_number) {
+            groups[bId].seats.push(item.Seat?.seatNumber || item.Seat?.seat_number);
           }
           groups[bId].rawTickets.push(item);
         });

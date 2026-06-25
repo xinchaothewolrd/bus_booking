@@ -28,6 +28,7 @@ export const Ticket = sequelize.define('Ticket', {
   trip_seat_id: { type: DataTypes.INTEGER, allowNull: false }, // ID ghế từ Trip Service
   passenger_name: { type: DataTypes.STRING(100) },
   passenger_phone: { type: DataTypes.STRING(20) },
+  passenger_email: { type: DataTypes.STRING(255) },
   pickup_stop_id: { type: DataTypes.INTEGER },    // ID từ Catalog Service
   dropoff_stop_id: { type: DataTypes.INTEGER },   // ID từ Catalog Service
   qr_code: { type: DataTypes.STRING(255), unique: true },

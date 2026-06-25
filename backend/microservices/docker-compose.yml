@@ -101,7 +101,7 @@ services:
       DB_NAME: catalog_service_db
       DB_USER: root
       DB_PASS: rootpassword
-      ALLOWED_ORIGIN: http://api-gateway:3000
+      ALLOWED_ORIGIN: http://localhost:5173
     ports:
       - "3002:3002"
     depends_on:
@@ -125,7 +125,8 @@ services:
       DB_NAME: trip_service_db
       DB_USER: root
       DB_PASS: rootpassword
-      ALLOWED_ORIGIN: http://api-gateway:3000
+      ALLOWED_ORIGIN: http://localhost:5173
+      API_GATEWAY_URL: http://api-gateway:3000
     ports:
       - "3003:3003"
     depends_on:

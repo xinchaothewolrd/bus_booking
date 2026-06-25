@@ -2,7 +2,7 @@
 import { Router } from 'express';
 import {
   getTicketsByBooking, getTicketById, getTicketByQr, useTicket,
-  getAllTickets, createTicket, updateTicket, deleteTicket, getTicketsByUser
+  getAllTickets, createTicket, updateTicket, deleteTicket, getTicketsByUser, getTicketsByTrip
 } from '../controllers/ticketController.js';
 import { protectedRoute, requireAdmin } from '../middlewares/authMiddleware.js';
 
@@ -15,6 +15,7 @@ router.put('/:id', requireAdmin, updateTicket);               // Admin cập nh�
 router.delete('/:id', requireAdmin, deleteTicket);              // Admin xóa
 
 // User/Admin routes
+router.get('/trip/:tripId', protectedRoute, getTicketsByTrip);          // Lấy vé theo chuyến xe
 router.get('/booking/:bookingId', protectedRoute, getTicketsByBooking); // Xem vé theo booking
 router.get('/check/:qrCode', requireAdmin, getTicketByQr);               // Admin check QR code
 router.get('/user/:userId', protectedRoute, getTicketsByUser);        // User xem tất cả vé của mình

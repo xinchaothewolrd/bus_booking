@@ -1,6 +1,7 @@
 // controllers/userController.js — Quản lý thông tin user
 
 import User from '../models/User.js';
+import bcrypt from 'bcrypt';
 
 // GET /api/users/me — Lấy thông tin bản thân (req.user gắn bởi middleware)
 export const getMe = async (req, res) => {
@@ -46,11 +47,17 @@ export const updateUser = async (req, res) => {
     const user = await User.findByPk(req.params.id);
     if (!user) return res.status(404).json({ message: 'User không tồn tại.' });
 
-    const { full_name, phone, status, role } = req.body;
+    const { full_name, phone, status, role, email } = req.body;
     if (full_name) user.full_name = full_name;
     if (phone) user.phone = phone;
     if (status) user.status = status;    // Admin mới được đổi status
     if (role) user.role = role;          // Admin mới được đổi role
+    
+    if (email && email !== user.email) {
+      const existing = await User.findOne({ where: { email } });
+      if (existing) return res.status(409).json({ message: 'Email đã tồn tại.' });
+      user.email = email;
+    }
 
     await user.save();
     return res.status(200).json({ message: 'Cập nhật thành công.', data: user });
@@ -85,6 +92,7 @@ export const createUser = async (req, res) => {
     }
 
     const { email, phone, full_name, password, role, status } = req.body;
+    console.log('--- REQ.BODY ---', req.body);
 
     if (!email || !phone || !full_name || !password) {
       return res.status(400).json({ message: 'Thiếu thông tin: email, phone, full_name, password' });
@@ -97,12 +105,15 @@ export const createUser = async (req, res) => {
     const existingPhone = await User.findOne({ where: { phone } });
     if (existingPhone) return res.status(409).json({ message: 'Số điện thoại đã tồn tại.' });
 
+    // Hash password trước khi lưu
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     // Tạo user mới
     const newUser = await User.create({
       email,
       phone,
       full_name,
-      password_hash: password, // TODO: hash password trước khi lưu
+      password: hashedPassword, // Lưu mật khẩu đã hash
       role: role || 'customer',
       status: status || 'active',
     });

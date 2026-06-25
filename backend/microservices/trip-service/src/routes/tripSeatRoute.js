@@ -2,7 +2,7 @@ import { Router } from 'express';
 import {
   getAllTripSeats, getTripSeatById, getSeatsByTripId,
   createTripSeat, updateTripSeat, deleteTripSeat,
-  lockSeats, bookSeats, releaseSeats
+  lockSeats, bookSeats, releaseSeats, updateSeatStatus
 } from '../controllers/tripSeatController.js';
 
 const router = Router();
@@ -23,5 +23,8 @@ router.patch('/release', releaseSeats);
 router.post('/', createTripSeat);
 router.put('/:id', updateTripSeat);
 router.delete('/:id', deleteTripSeat);
+
+// API riêng cho Frontend tự update trạng thái ghế
+router.patch('/:id/status', updateSeatStatus);
 
 export default router;

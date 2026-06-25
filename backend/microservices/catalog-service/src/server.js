@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDB } from './libs/db.js';
+import './models/index.js';
 
 // Import routes
 import busTypeRoute from './routes/busTypeRoute.js';

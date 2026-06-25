@@ -1,4 +1,24 @@
 import TripSeat from '../models/TripSeat.js';
+import axios from 'axios';
+
+const API_GATEWAY_URL = process.env.API_GATEWAY_URL || 'http://api-gateway:3000';
+
+const notifyGateway = async (seatOrSeats) => {
+  try {
+    const seats = Array.isArray(seatOrSeats) ? seatOrSeats : [seatOrSeats];
+    for (const seat of seats) {
+      await axios.post(`${API_GATEWAY_URL}/api/internal/notify-seat`, {
+        seatId: seat.id,
+        tripId: seat.tripId,
+        seatNumber: seat.seatNumber,
+        status: seat.status,
+        pendingUntil: seat.pendingUntil
+      }).catch(err => console.error('Lỗi khi báo Gateway cho ghế', seat.id, ':', err.message));
+    }
+  } catch (err) {
+    console.error('Lỗi chung khi báo Gateway:', err.message);
+  }
+};
 import Trip from '../models/Trip.js';
 
 export const getAllTripSeats = async (req, res) => {
@@ -79,6 +99,24 @@ export const updateTripSeat = async (req, res) => {
   }
 };
 
+export const updateSeatStatus = async (req, res) => {
+  try {
+    const { status } = req.body;
+    const seat = await TripSeat.findByPk(req.params.id);
+
+    if (!seat) return res.status(404).json({ message: 'Ghế không tồn tại.' });
+
+    await seat.update({ status });
+
+    notifyGateway(seat);
+
+    return res.status(200).json({ message: 'Cập nhật tình trạng ghế thành công.', data: seat });
+  } catch (error) {
+    console.error('Lỗi cập nhật trạng thái ghế:', error);
+    return res.status(500).json({ message: 'Lỗi hệ thống.' });
+  }
+};
+
 export const deleteTripSeat = async (req, res) => {
   try {
     const seat = await TripSeat.findByPk(req.params.id);
@@ -122,6 +160,10 @@ export const lockSeats = async (req, res) => {
       )
     ));
 
+    // Lấy lại danh sách ghế đã update để gửi sự kiện
+    const updatedSeats = await TripSeat.findAll({ where: { id: seatIds } });
+    notifyGateway(updatedSeats);
+
     return res.status(200).json({ message: 'Khóa ghế thành công' });
   } catch (error) {
     console.error('Lỗi lock ghế:', error);
@@ -144,6 +186,9 @@ export const bookSeats = async (req, res) => {
       )
     ));
 
+    const updatedSeats = await TripSeat.findAll({ where: { id: seatIds } });
+    notifyGateway(updatedSeats);
+
     return res.status(200).json({ message: 'Đặt ghế thành công' });
   } catch (error) {
     console.error('Lỗi book ghế:', error);
@@ -165,6 +210,9 @@ export const releaseSeats = async (req, res) => {
         { where: { id } }
       )
     ));
+
+    const updatedSeats = await TripSeat.findAll({ where: { id: seatIds } });
+    notifyGateway(updatedSeats);
 
     return res.status(200).json({ message: 'Nhả ghế thành công' });
   } catch (error) {

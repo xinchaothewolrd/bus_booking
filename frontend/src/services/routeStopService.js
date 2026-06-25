@@ -1,5 +1,5 @@
 import api from "./api";
 
 export const getRouteStopByRouteId = (routeId) => {
-    return api.get(`/route-stops/routes/${routeId}`); 
+    return api.get(`/route-stops?routeId=${routeId}`); 
 }

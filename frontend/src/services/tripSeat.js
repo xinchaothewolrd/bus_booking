@@ -4,12 +4,11 @@ export const getSeatByTripId = (tripId) => {
     return api.get(`/trip-seats/trip/${tripId}`)
 }
 
-// Nhận vào thẳng seatNumbers (mảng) từ component
-export const holdSeat = ({ tripId, seatNumbers }) => {
-  // Gửi y xì đúc cái mảng đó xuống backend
-  return api.post('/trip-seats/hold', { tripId, seatNumbers });
+// Nhận vào thẳng seatIds (mảng id trong DB) từ component
+export const holdSeat = ({ tripId, seatIds }) => {
+  return api.patch('/trip-seats/lock', { tripId, seatIds });
 };
 
-export const releaseSeat = ({ tripId, seatNumbers }) => {
-  return api.post('/trip-seats/release', { tripId, seatNumbers });
+export const releaseSeat = ({ tripId, seatIds }) => {
+  return api.patch('/trip-seats/release', { tripId, seatIds });
 };

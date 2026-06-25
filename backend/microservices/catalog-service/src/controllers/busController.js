@@ -1,5 +1,4 @@
-import Bus from '../models/Bus.js';
-import BusType from '../models/BusType.js';
+import { Bus, BusType } from '../models/index.js';
 
 export const getAllBuses = async (req, res) => {
   try {
